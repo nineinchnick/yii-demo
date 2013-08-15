@@ -49,6 +49,7 @@ return array(
 				array('class'=>'CFileLogRoute'),
 			),
 		),
+		'viewRenderer' => array('class'=>'MdViewRenderer'),
 	),
 	'params'=>array(
 		'adminEmail'=>'janek.jan@gmail.com',
