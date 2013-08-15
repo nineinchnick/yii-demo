@@ -122,7 +122,12 @@ class UserIdentity extends CUserIdentity implements IPasswordHistoryIdentity,IAc
 	}
 
 	public function save() {
-		$record = $this->_id===null ? new User : User::model()->findByPk($this->_id);
+		if ($this->_id === null) {
+			$record = new User;
+			$record->password = 'x';
+		} else {
+			$record = User::model()->findByPk($this->_id);
+		}
 		if ($record!==null) {
 			$record->setAttributes(array(
 				'username' => $this->username,
