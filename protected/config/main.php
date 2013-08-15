@@ -18,6 +18,7 @@ return array(
 		),
 		'nfy'=>array(
 			'class'=>'vendors.nineinchnick.yii-nfy.NfyModule',
+			'longPolling'=>null,
 		),
 		'usr'=>array(
 			'class'=>'vendors.nineinchnick.yii-usr.UsrModule',
@@ -28,6 +29,7 @@ return array(
 	'components'=>array(
 		'user'=>array(
 			'allowAutoLogin'=>true,
+			'loginUrl'=>array('/usr/login'),
 		),
 		'urlManager'=>array(
 			'urlFormat'=>'path',

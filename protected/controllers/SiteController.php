@@ -23,6 +23,19 @@ class SiteController extends Controller
 		$this->redirect(array('page'));
 	}
 
+	public function actionNotifications()
+	{
+		if (Yii::app()->user->isGuest) {
+			Yii::app()->user->loginRequired();
+		}
+
+		if (isset($_POST['submit'])) {
+			Yii::import('nfy.components.Nfy');
+			Nfy::log('test');
+		}
+		$this->render('notifications');
+	}
+
 	/**
 	 * This is the action to handle external exceptions.
 	 */

@@ -30,8 +30,10 @@
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
+				array('label'=>'Notifications', 'url'=>array('/site/notifications')),
 				array('label'=>'Login', 'url'=>array('/usr/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/usr/logout'), 'visible'=>!Yii::app()->user->isGuest)
+				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/usr/logout'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'Profile', 'url'=>array('/usr/profile'), 'visible'=>!Yii::app()->user->isGuest),
 			),
 		)); ?>
 	</div><!-- mainmenu -->
@@ -52,6 +54,10 @@
 	</div><!-- footer -->
 
 </div><!-- page -->
+
+<?php if (!Yii::app()->user->isGuest): ?>
+<?php $this->widget('nfy.extensions.webNotifications.WebNotifications', array('url'=>$this->createUrl('/nfy/default/poll'))); ?>
+<?php endif; ?>
 
 </body>
 </html>
