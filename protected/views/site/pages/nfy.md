@@ -24,9 +24,12 @@ Notifications are added to this channel by pressing a button.
 		// ...
 		'nfy'=>array(
 			'class'=>'vendors.nineinchnick.yii-nfy.NfyModule',
+			'longPolling'=>null,
 		),
 	),
 ~~~
+
+Long polling is disabled here because it seems this shared hosting platform allows only one process to serve this site.
 
 ### Migrations
 
