@@ -1,1 +1,4 @@
 protected/vendors
+protected/runtime
+protected/data/testdrive.db
+assets
