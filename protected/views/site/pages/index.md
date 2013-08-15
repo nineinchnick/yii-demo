@@ -28,6 +28,12 @@ class MdViewRenderer extends CViewRenderer
 		file_put_contents($viewFile,$output);
 	}
 
+	public function renderFile($context,$sourceFile,$data,$return)
+	{
+		$md=new CMarkdown;
+		$md->registerCssFile();
+		return parent::renderFile($context,$sourceFile,$data,$return);
+	}
 }
 ~~~
 
