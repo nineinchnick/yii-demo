@@ -8,6 +8,30 @@ This page presents the list of modifications and widgets/extensions installed he
 
 All source code is available in a [public GitHub repository](https://github.com/nineinchnick/yii-demo).
 
+## Usr module
+
+Replaces login actions, views and form models from the demo.
+
+[Read more](/site/page?view=usr).
+
+## Nfy module
+
+Demo of a notifications system.
+
+[Read more](/site/page?view=nfy).
+
+## EDataTables extension
+
+A grid view widget, replacing CGridView.
+
+[Read more](/site/page?view=edatatables).
+
+## Exporter
+
+A grid view widget for exporting large amounts of data in various formats like CSV or XML.
+
+[Read more](/site/page?view=exporter).
+
 ## MdViewRenderer
 
 A simple view renderer has been added to allow writing static pages, like this one.
@@ -48,23 +72,4 @@ The view renderer needs to be enabled in the configuration, in the components se
 		'viewRenderer' => array('class'=>'MdViewRenderer'),
 	),
 ~~~
-
-
-## Usr module
-
-Replaces login actions, views and form models from the demo.
-
-[Read more](/site/page?view=usr).
-
-## Nfy module
-
-Demo of a notifications system.
-
-[Read more](/site/page?view=nfy).
-
-## EDataTables extension
-
-A grid view widget, replacing CGridView.
-
-[Read more](/site/page?view=edatatables).
 
