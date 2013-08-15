@@ -110,13 +110,13 @@ class User extends CActiveRecord
 
 	public static function hashPassword($password)
 	{
-		require(Yii::getPathOfAlias('usr.extensions').'password.php');
-		return password_hash($password);
+		require(Yii::getPathOfAlias('usr.extensions').DIRECTORY_SEPARATOR.'password.php');
+		return password_hash($password, PASSWORD_DEFAULT);
 	}
 
 	public function verifyPassword($password)
 	{
-		require(Yii::getPathOfAlias('usr.extensions').'password.php');
+		require(Yii::getPathOfAlias('usr.extensions').DIRECTORY_SEPARATOR.'password.php');
 		return $this->password !== null && password_verify($password, $this->password);
 	}
 }
