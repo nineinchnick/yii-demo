@@ -24,6 +24,10 @@ return array(
 			'class'=>'vendors.nineinchnick.yii-usr.UsrModule',
 			'layout'=>'//layouts/column1',
 			'userIdentityClass' => 'UserIdentity',
+			'mailerConfig' => array(
+				'SetFrom' => array('admin@bender.yum.pl', 'Administrator'),
+				'AddReplyTo' => array('janek.jan@gmail.com','Administrator'),
+			),
 		),
 	),
 	'components'=>array(

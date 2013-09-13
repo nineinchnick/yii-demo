@@ -40,7 +40,7 @@ class UserIdentity extends CUserIdentity implements IPasswordHistoryIdentity,IAc
 	}
 
 	public function getPasswordDate($password = null) {
-		if ($this->_id===null)
+		if ($this->_id===null || $password !== null)
 			return null;
 		if (($record=User::model()->findByPk($this->_id))!==null) {
 			return $record->password_set_on;
@@ -91,7 +91,7 @@ class UserIdentity extends CUserIdentity implements IPasswordHistoryIdentity,IAc
 		if ($this->_id===null)
 			return self::ERROR_AKEY_INVALID;
 		if (($record=User::model()->findByPk($this->_id))!==null) {
-			return $record->activkey === $activationKey ? self::ERROR_AKEY_NONE : self::ERROR_AKEY_INVALID;
+			return $record->activation_key === $activationKey ? self::ERROR_AKEY_NONE : self::ERROR_AKEY_INVALID;
 		}
 		return self::ERROR_AKEY_INVALID;
 	}
