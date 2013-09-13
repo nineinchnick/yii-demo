@@ -48,10 +48,10 @@ class GoldFixing extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'date' => 'Date',
-			'rate' => 'Rate',
-			'currency' => 'Currency',
+			'id' => Yii::t('models','ID'),
+			'date' => Yii::t('models','Date'),
+			'rate' => Yii::t('models','Rate'),
+			'currency' => Yii::t('models','Currency'),
 		);
 	}
 

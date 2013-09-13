@@ -12,4 +12,20 @@
 
 <h2>Demo</h2>
 
-<?php $widget->run();
+<?php $widget->run(); ?>
+
+<h3>Controller</h3>
+
+<?php $this->beginWidget('system.web.widgets.CTextHighlighter',array('language'=>'PHP')); ?>
+<?php echo file_get_contents(Yii::getPathOfAlias('application.controllers.EdatatablesController').'.php'); ?>
+<?php $this->endWidget(); ?>
+
+<h3>Model</h3>
+
+<?php $this->beginWidget('system.web.widgets.CTextHighlighter',array('language'=>'PHP')); ?>
+<?php echo file_get_contents(Yii::getPathOfAlias('application.models.GoldFixing').'.php'); ?>
+<?php $this->endWidget(); ?>
+
+<h3>View</h3>
+
+The only relevant line is: &lt;?php $widget-&gt;run(); ?&gt;

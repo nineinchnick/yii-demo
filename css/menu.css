@@ -1,0 +1,15 @@
+#mainmenu ul { list-style: none; margin: 0; padding: 0; position: relative; height: 28px; }
+ 
+#mainmenu ul li { display: block; height: 28px; float: left; overflow: visible; }
+#mainmenu ul li:hover > ul { display: block; }
+ 
+#mainmenu ul li a { float: left; display: block; }
+ 
+#mainmenu ul li ul { display: none; position: absolute; top: 100%;
+                    background: #000; color: #fff; height: auto;
+}
+ 
+#mainmenu ul li ul li a { color: #ccc; padding: 4px 14px; display: block; }
+ 
+#mainmenu ul li ul li.active a,
+#mainmenu ul li ul li a:hover { color: #fff; }

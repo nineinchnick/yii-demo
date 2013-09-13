@@ -8,6 +8,16 @@ This page presents the list of modifications and widgets/extensions installed he
 
 All source code is available in a [public GitHub repository](https://github.com/nineinchnick/yii-demo).
 
+## Language and theme selector
+
+The main menu contains list of available languages and themes.
+
+Switching happens in a ApplicationConfigBehavior attached to the application that executes an event callback before processing the request.
+
+Flag icons with some css has been imported and some css has been added in the default theme for a drop down in the main menu.
+
+Main menu items definition has been moved to the base Controller class.
+
 ## Usr module
 
 Replaces login actions, views and form models from the demo.

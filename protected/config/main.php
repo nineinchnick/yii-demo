@@ -1,15 +1,25 @@
 <?php
 
-Yii::setPathOfAlias('vendors',dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'vendors');
-
 return array(
-	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'Widgets and Extensions demo',
+	'basePath'		=> dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
+	'name'			=> 'Widgets and Extensions demo',
+	'layout'		=> 'main',
+	'sourceLanguage'=> 'en',
+
+	// this can be overriden by ApplicationConfigBehavior
+	'language'		=> 'en',
+
+	'aliases'		=> array(
+		'vendors' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'vendors',
+		'bootstrap' => 'ext.bootstrap',
+	),
 	'preload'=>array('log'),
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'bootstrap.helpers.TbHtml',
 	),
+	'behaviors' => array('ApplicationConfigBehavior'),
 	'modules'=>array(
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
@@ -57,6 +67,12 @@ return array(
 			),
 		),
 		'viewRenderer' => array('class'=>'MdViewRenderer'),
+		'bootstrap' => array(
+			'class' => 'bootstrap.components.TbApi',   
+		),
+		'widgetFactory'=>array(
+			'enableSkin'=>true,
+		),
 	),
 	'params'=>array(
 		'adminEmail'=>'janek.jan@gmail.com',
