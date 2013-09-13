@@ -31,6 +31,7 @@
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
 				array('label'=>'Notifications', 'url'=>array('/site/notifications')),
+				array('label'=>'EDataTables', 'url'=>array('/edatatables')),
 				array('label'=>'Login', 'url'=>array('/usr/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/usr/logout'), 'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Profile', 'url'=>array('/usr/profile'), 'visible'=>!Yii::app()->user->isGuest),
@@ -56,7 +57,28 @@
 </div><!-- page -->
 
 <?php if (!Yii::app()->user->isGuest): ?>
-<?php $this->widget('nfy.extensions.webNotifications.WebNotifications', array('url'=>$this->createUrl('/nfy/default/poll'))); ?>
+<?php Yii::import('nfy.extensions.webNotifications.WebNotifications'); ?>
+<?php $this->widget('nfy.extensions.webNotifications.WebNotifications', array(
+	//'url'=>$this->createUrl('/nfy/default/poll'),
+	'url'=>'ws://ws.pusherapp.com:80/app/fb580666833f03a21f05?client=socket.io&protocol=6',
+	'method'=>WebNotifications::METHOD_PUSH,
+	'websocket'=>array(
+		'onopen'=>'js:function(_socket){return function(e) {
+			_socket.send(JSON.stringify({
+				"event": "pusher:subscribe",
+				"data": {"channel": "test_channel"}
+			}));
+		};}',
+		'onmessage'=>'js:function(_socket){return function(e) {
+			var message = JSON.parse(e.data);
+			var data = JSON.parse(message.data);
+			if (typeof data.title != "undefined" && typeof data.body != "undefined") {
+				notificationsPoller.addMessage(data);
+				notificationsPoller.display();
+			}
+		};}',
+	),
+)); ?>
 <?php endif; ?>
 
 </body>

@@ -14,7 +14,7 @@
     "require": {
 		"php": ">=5.3.2"
 		,"yiisoft/yii": "1.1.14"
-		,"nineinchnick/edatatables": "~0.9"
+		,"nineinchnick/edatatables": "dev-master"
 		,"nineinchnick/select2": "~1.0"
 		,"nineinchnick/yii-nfy": "dev-master"
 		,"nineinchnick/yii-usr": "dev-master"

@@ -30,8 +30,17 @@ class SiteController extends Controller
 		}
 
 		if (isset($_POST['submit'])) {
-			Yii::import('nfy.components.Nfy');
-			Nfy::log('test');
+			// either log through Nfy
+			//Yii::import('nfy.components.Nfy');
+			//Nfy::log('test');
+			// or directly to some MQ that the WebSocket server is reading from
+			$pusher = Yii::createComponent(array(
+				'class' => 'Pusher',
+				'key' => 'fb580666833f03a21f05',
+				'secret' => '9083b3a808372d114c0d',
+				'appId' => '52170',
+			));
+			$pusher->trigger('test_channel','newMessage',array('title'=>'nfy title', 'body'=>'test message'));
 		}
 		$this->render('notifications');
 	}

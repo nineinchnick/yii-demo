@@ -24,7 +24,7 @@ Demo of a notifications system.
 
 A grid view widget, replacing CGridView.
 
-[Read more](/site/page?view=edatatables).
+[Read more](/edatatables).
 
 ## Exporter
 
