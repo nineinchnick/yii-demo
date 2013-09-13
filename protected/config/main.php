@@ -43,6 +43,7 @@ return array(
 		'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 			'tablePrefix' => 'tbl_',
+			'enableParamLogging'=>true,
 		),
 		'errorHandler'=>array('errorAction'=>'site/error'),
 		'log'=>array(
