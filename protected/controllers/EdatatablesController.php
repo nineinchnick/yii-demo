@@ -6,17 +6,18 @@ class EdatatablesController extends Controller
 	{
 		Yii::import('ext.EDataTables.*');
 
-		$model = new GoldFixing('search');
+		$model = new PreciousMetalFixing('search');
 		$model->setAttributes(array_fill_keys($model->attributeNames(), null));
 
 		$columns = array(
+			'preciousMetal.name:text',
 			'date:date',
 			array(
 				'name'=>'rate',
 				'type'=>'number',
 				'value'=>'$data->rate/100.0',
 			),
-			'currency:text',
+			'currency.name:text',
 		);
 		$dataProvider = $model->search($columns);
 

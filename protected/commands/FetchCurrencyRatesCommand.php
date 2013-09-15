@@ -3,10 +3,11 @@
 class FetchCurrencyRatesCommand extends CConsoleCommand
 {
 	public function actionFetchMissingFixings($currency) {
+		$currency_id = Yii::app()->db->createCommand()->select('id')->from('{{currencies}}')->where('code=:code')->queryScalar(array(':code'=>$currency));
 		$lastDate = Yii::app()->db->createCommand()
 			->select('max(date)')
 			->from('{{currency_fixings}}')
-			->where(array('and','currency = :currency'))->queryScalar(array(':currency'=>$currency));
+			->where(array('and','currency_id = :currency_id'))->queryScalar(array(':currency_id'=>$currency_id));
 		if (!$lastDate)
 			$lastDate = '2002-01-01';
 		$today = new DateTime;
@@ -14,7 +15,7 @@ class FetchCurrencyRatesCommand extends CConsoleCommand
 		$oneDay = new DateInterval('P1D');
 
 
-		$stmt = Yii::app()->db->createCommand("INSERT INTO {{currency_fixings}} (currency, date, rate) VALUES ('$currency', :date, :rate)");
+		$stmt = Yii::app()->db->createCommand("INSERT INTO {{currency_fixings}} (currency_id, date, rate) VALUES ('$currency_id', :date, :rate)");
 		$fixingList = file_get_contents('http://nbp.pl/Kursy/xml/dir.txt');
 
 		while($lastDate->add($oneDay) < $today) {
@@ -68,7 +69,7 @@ class FetchCurrencyRatesCommand extends CConsoleCommand
 
 	public function actionExport() {
 		$currency = Yii::app()->db->createCommand('SELECT * FROM {{currency_fixings}}')->queryAll();
-		$gold = Yii::app()->db->createCommand('SELECT * FROM {{gold_fixings}}')->queryAll();
+		$gold = Yii::app()->db->createCommand('SELECT * FROM {{precious_metal_fixings}}')->queryAll();
 		file_put_contents('data/export.php', "<?php\n\$currency = ".var_export($currency,true).";\n\$gold = ".var_export($gold,true).";\n");
 	}
 }

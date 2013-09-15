@@ -23,7 +23,7 @@
 <h3>Model</h3>
 
 <?php $this->beginWidget('system.web.widgets.CTextHighlighter',array('language'=>'PHP')); ?>
-<?php echo file_get_contents(Yii::getPathOfAlias('application.models.GoldFixing').'.php'); ?>
+<?php echo file_get_contents(Yii::getPathOfAlias('application.models.PreciousMetalFixing').'.php'); ?>
 <?php $this->endWidget(); ?>
 
 <h3>View</h3>
