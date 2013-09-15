@@ -52,7 +52,7 @@ class m130915_152207_add_country_and_currency_data extends CDbMigration
 			$header = fgetcsv($handle, 1000, ",");
 			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
 				foreach($data as $i=>$col) {
-					$data[$i]=trim($col);
+					$data[$i]=trim($col, " \t\n\r\0\x0B\xA0");
 					if ($data[$i]=='')
 						$data[$i]=null;
 				}
@@ -87,7 +87,7 @@ class m130915_152207_add_country_and_currency_data extends CDbMigration
 			$currencies = array();
 			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
 				foreach($data as $i=>$col) {
-					$data[$i]=trim($col);
+					$data[$i]=trim($col, " \t\n\r\0\x0B\xA0");
 					if ($data[$i]=='')
 						$data[$i]=null;
 				}

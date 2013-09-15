@@ -61,8 +61,9 @@ class m130915_195153_refactor_fixing_tables extends CDbMigration
 
 	public function safeDown()
 	{
-		$this->dropTable('{{gold_fixings}}');
+		$this->dropTable('{{precious_metal_fixings}}');
 		$this->dropTable('{{currency_fixings}}');
+		$this->dropTable('{{precious_metals}}');
 
 		$this->createTable('{{currency_fixings}}', array(
 			'id'=>'pk',
