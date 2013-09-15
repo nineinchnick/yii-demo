@@ -19,6 +19,8 @@ return array(
 		'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 			'tablePrefix' => 'tbl_',
+			'enableParamLogging'=>true,
+			'initSQLs' => array('PRAGMA foreign_keys = ON'),
 		),
 		'log'=>array(
 			'class'=>'CLogRouter',
