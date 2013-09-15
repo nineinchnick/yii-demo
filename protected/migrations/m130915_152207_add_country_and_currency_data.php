@@ -11,9 +11,8 @@ class m130915_152207_add_country_and_currency_data extends CDbMigration
 			'code'=>'char(3) NOT NULL',
 			'number'=>'integer',
 			'minor_unit'=>'integer',
-			//'country_id'=>'integer NOT NULL',
-			//'withdrawn_date'=>'string',
-			//'comment'=>'text',
+			'withdrawn_date'=>'string',
+			'comment'=>'text',
 		));
 		// DS,Dial,Entity,FIFA,FIPS,GAUL,IOC,ISO3166-1-Alpha-2,ISO3166-1-Alpha-3,ISO3166-1-numeric,
 		// ITU,MARC,WMO,currency_alphabetic_code,currency_minor_unit,currency_name,currency_numeric_code,currency_short_name_en,is_independent,short_name_en,short_name_fr
@@ -40,10 +39,8 @@ class m130915_152207_add_country_and_currency_data extends CDbMigration
 			'marc_code'=>'string', // 11 MARC
 			'wmo_code'=>'string', // 12 WMO
 		));
-		//$this->addColumn('{{currencies}}', 'country_id', 'integer REFERENCES {{countries}} (id) ON DELETE RESTRICT ON UPDATE CASCADE DEFERRABLE INITIALLY DEFERRED');
-		$this->addColumn('{{currencies}}', 'withdrawn_date', 'string');
-		$this->addColumn('{{currencies}}', 'comment', 'text');
 
+		$this->createIndex('{{countries}}_currency_id_idx','{{countries}}','currency_id',true);
 		$this->createIndex('{{countries}}_code_idx','{{countries}}','code',true);
 		$this->createIndex('{{currencies}}_code_idx','{{currencies}}','code',true);
 
