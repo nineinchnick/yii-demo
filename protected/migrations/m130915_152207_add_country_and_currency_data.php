@@ -24,7 +24,7 @@ class m130915_152207_add_country_and_currency_data extends CDbMigration
 			'short_code'=>'char(2) NOT NULL', // 7 ISO3166-1-Alpha-2
 			'code'=>'char(3) NOT NULL', // 8 ISO3166-1-Alpha-3
 			'telephone_prefix'=>'string', // 1 Dial
-			'currency_id'=>'integer REFERENCES {{currencies}} (id) ON DELETE RESTRICT ON UPDATE CASCADE DEFERRABLE INITIALLY DEFERRED',
+			'currency_id'=>'integer REFERENCES {{currencies}} (id) ON DELETE RESTRICT ON UPDATE CASCADE',
 			'is_independent'=>'boolean NOT NULL DEFAULT YES', // 18
 		));
 		$this->createTable('{{country_codes}}', array(
@@ -40,7 +40,7 @@ class m130915_152207_add_country_and_currency_data extends CDbMigration
 			'wmo_code'=>'string', // 12 WMO
 		));
 
-		$this->createIndex('{{countries}}_currency_id_idx','{{countries}}','currency_id',true);
+		$this->createIndex('{{countries}}_currency_id_idx','{{countries}}','currency_id');
 		$this->createIndex('{{countries}}_code_idx','{{countries}}','code',true);
 		$this->createIndex('{{currencies}}_code_idx','{{currencies}}','code',true);
 
@@ -66,7 +66,9 @@ class m130915_152207_add_country_and_currency_data extends CDbMigration
 					'is_independent'	=> $data[18]=='Yes',
 				));
 				$country_id = Yii::app()->db->getLastInsertID();
-				$countryCurrencyMap[$data[16]] = $country_id;
+				if (!isset($countryCurrencyMap[$data[16]]))
+					$countryCurrencyMap[$data[16]] = array();
+				$countryCurrencyMap[$data[16]][] = $country_id;
 				$this->insert('{{country_codes}}', array(
 					'country_id'=>$country_id,
 					'numeric_code'=>$data[9],
@@ -97,13 +99,15 @@ class m130915_152207_add_country_and_currency_data extends CDbMigration
 					'code'=>$data[2],
 					'number'=>$data[3]=='—' ? null : $data[3],
 					'minor_unit'=>$data[4] == 'N.A.' ? null : $data[4],
-					//'country_id'=>$countryCurrencyMap[$data[3]],
 					'withdrawn_date'=>isset($data[5])?$data[5] : null,
 					'comment'=>isset($data[6])?$data[6] : null,
 				));
 				$currencies[$data[2]] = Yii::app()->db->getLastInsertID();
-				if (isset($countryCurrencyMap[$data[3]]))
-					$countryCurrencyMapReverse[$countryCurrencyMap[$data[3]]] = Yii::app()->db->getLastInsertID();
+				if (isset($countryCurrencyMap[$data[3]])) {
+					foreach($countryCurrencyMap[$data[3]] as $country_id) {
+						$countryCurrencyMapReverse[$country_id] = Yii::app()->db->getLastInsertID();
+					}
+				}
 			}
 			fclose($handle);
 		}
