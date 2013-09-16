@@ -26,18 +26,30 @@ my $dbh = DBI->connect($connectionString, $dbuser, $dbpass, {AutoCommit => 0}) o
 
 my $currencyId = $dbh->selectrow_array("SELECT id FROM ${prefix}currencies WHERE code = 'USD'");
 my $goldId = $dbh->selectrow_array("SELECT id FROM ${prefix}precious_metals WHERE name = 'Gold'");
-my $lastDate = $dbh->selectrow_array("SELECT max(date) FROM ${prefix}currency_fixings WHERE currency_id = $currencyId");
-my @parts = split('-',!$lastDate ? '2002-01-01' : substr($lastDate, 0, 10));
-$lastDate = DateTime->new(year => $parts[0], month => $parts[1], day => $parts[2]);
+my $silverId = $dbh->selectrow_array("SELECT id FROM ${prefix}precious_metals WHERE name = 'Silver'");
+my $goldLastDate = $dbh->selectrow_array("SELECT max(date) FROM ${prefix}precious_metal_fixings WHERE currency_id = $currencyId AND precious_metal_id = $goldId");
+my @parts = split('-',!$goldLastDate ? '2002-01-01' : substr($goldLastDate, 0, 10));
+$goldLastDate = DateTime->new(year => $parts[0], month => $parts[1], day => $parts[2]);
+my $silverLastDate = $dbh->selectrow_array("SELECT max(date) FROM ${prefix}precious_metal_fixings WHERE currency_id = $currencyId AND precious_metal_id = $goldId");
+my @parts = split('-',!$silverLastDate ? '2002-01-01' : substr($silverLastDate, 0, 10));
+$silverLastDate = DateTime->new(year => $parts[0], month => $parts[1], day => $parts[2]);
 my $today = DateTime->today();
 
 my $stmt_insert = $dbh->prepare("INSERT INTO ${prefix}precious_metal_fixings (precious_metal_id, currency_id, date, rate) VALUES (?,?,?,?)");
 
-while ( $lastDate->add(days => 1) <= $today ) {
-	print "Checking ",$lastDate;
-	my @fixing = $lbma->dailygoldfixing( year => $lastDate->year(), month => $lastDate->month(), day => $lastDate->day());
+while ( $goldLastDate->add(days => 1) <= $today ) {
+	print "Checking ",$goldLastDate;
+	my @fixing = $lbma->dailygoldfixing( year => $goldLastDate->year(), month => $goldLastDate->month(), day => $goldLastDate->day());
 	if (@fixing) {
-		$stmt_insert->execute($goldId, $currencyId, $lastDate->ymd('-'), $fixing[1]*100);
+		$stmt_insert->execute($goldId, $currencyId, $goldLastDate->ymd('-'), $fixing[1]*100);
+	}
+}
+
+while ( $silverLastDate->add(days => 1) <= $today ) {
+	print "Checking ",$silverLastDate;
+	my @fixing = $lbma->dailysilverfixing( year => $silverLastDate->year(), month => $silverLastDate->month(), day => $silverLastDate->day());
+	if (@fixing) {
+		$stmt_insert->execute($silverId, $currencyId, $silverLastDate->ymd('-'), $fixing[1]*100);
 	}
 }
 

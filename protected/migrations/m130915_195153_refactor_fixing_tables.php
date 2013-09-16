@@ -22,6 +22,7 @@ class m130915_195153_refactor_fixing_tables extends CDbMigration
 			'name'=>'string NOT NULL',
 		));
 		$this->insert('{{precious_metals}}', array('name'=>'Gold'));
+		$this->insert('{{precious_metals}}', array('name'=>'Silver'));
 		$gold_id = Yii::app()->db->getLastInsertID();
 
 		$this->createTable('{{precious_metal_fixings}}', array(
