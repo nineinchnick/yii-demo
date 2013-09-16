@@ -20,6 +20,7 @@
 		,"nineinchnick/yii-usr": "dev-master"
 		,"nineinchnick/yii-exporter": "dev-master"
 		,"crisu83/yiistrap": "dev-master"
+		,"fzaninotto/faker": "dev-master"
     }, 
 	"config": { 
 		"vendor-dir": "protected/vendors" 

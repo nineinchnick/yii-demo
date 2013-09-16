@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "f5898f4d9e8a8e9521437a86b5548a67",
+    "hash": "021f083661916a58a30cdd96c569a2a8",
     "packages": [
         {
             "name": "crisu83/yiistrap",
@@ -53,6 +53,52 @@
                 "yii"
             ],
             "time": "2013-09-06 08:48:52"
+        },
+        {
+            "name": "fzaninotto/faker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "f26009a28528a340ecb516b924a6cdc43396c11b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/f26009a28528a340ecb516b924a6cdc43396c11b",
+                "reference": "f26009a28528a340ecb516b924a6cdc43396c11b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Faker": "src/",
+                    "Faker\\PHPUnit": "test/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "time": "2013-09-16 09:40:17"
         },
         {
             "name": "nineinchnick/edatatables",
@@ -307,7 +353,8 @@
         "nineinchnick/yii-nfy": 20,
         "nineinchnick/yii-usr": 20,
         "nineinchnick/yii-exporter": 20,
-        "crisu83/yiistrap": 20
+        "crisu83/yiistrap": 20,
+        "fzaninotto/faker": 20
     },
     "platform": {
         "php": ">=5.3.2"

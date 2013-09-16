@@ -71,6 +71,10 @@ class Controller extends CController
 				'url'=>array('/edatatables'),
 			),
 			array(
+				'label'=>Yii::t('app','Faker'),
+				'url'=>array('/faker'),
+			),
+			array(
 				'label'=>Yii::t('app','Login'),
 				'url'=>array('/usr/login'),
 				'visible'=>Yii::app()->user->isGuest,

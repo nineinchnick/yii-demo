@@ -34,7 +34,7 @@ my $today = DateTime->today();
 my $goldLastDate = $dbh->selectrow_array("SELECT max(date) FROM ${prefix}precious_metal_fixings WHERE currency_id = $currencyId AND precious_metal_id = $goldId");
 @parts = split('-',!$goldLastDate ? '2002-01-01' : substr($goldLastDate, 0, 10));
 $goldLastDate = DateTime->new(year => $parts[0], month => $parts[1], day => $parts[2]);
-my $silverLastDate = $dbh->selectrow_array("SELECT max(date) FROM ${prefix}precious_metal_fixings WHERE currency_id = $currencyId AND precious_metal_id = $goldId");
+my $silverLastDate = $dbh->selectrow_array("SELECT max(date) FROM ${prefix}precious_metal_fixings WHERE currency_id = $currencyId AND precious_metal_id = $silverId");
 @parts = split('-',!$silverLastDate ? '2002-01-01' : substr($silverLastDate, 0, 10));
 $silverLastDate = DateTime->new(year => $parts[0], month => $parts[1], day => $parts[2]);
 
