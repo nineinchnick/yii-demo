@@ -11,6 +11,7 @@ return array(
 
 	'aliases'		=> array(
 		'vendors' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'vendors',
+		'Faker' => 'application.vendors.fzaninotto.faker.src.Faker',
 		'bootstrap' => 'ext.bootstrap',
 	),
 	'preload'=>array('log'),
