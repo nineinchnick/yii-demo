@@ -27,13 +27,16 @@ my $dbh = DBI->connect($connectionString, $dbuser, $dbpass, {AutoCommit => 0}) o
 my $currencyId = $dbh->selectrow_array("SELECT id FROM ${prefix}currencies WHERE code = 'USD'");
 my $goldId = $dbh->selectrow_array("SELECT id FROM ${prefix}precious_metals WHERE name = 'Gold'");
 my $silverId = $dbh->selectrow_array("SELECT id FROM ${prefix}precious_metals WHERE name = 'Silver'");
+
+my @parts;
+my $today = DateTime->today();
+
 my $goldLastDate = $dbh->selectrow_array("SELECT max(date) FROM ${prefix}precious_metal_fixings WHERE currency_id = $currencyId AND precious_metal_id = $goldId");
-my @parts = split('-',!$goldLastDate ? '2002-01-01' : substr($goldLastDate, 0, 10));
+@parts = split('-',!$goldLastDate ? '2002-01-01' : substr($goldLastDate, 0, 10));
 $goldLastDate = DateTime->new(year => $parts[0], month => $parts[1], day => $parts[2]);
 my $silverLastDate = $dbh->selectrow_array("SELECT max(date) FROM ${prefix}precious_metal_fixings WHERE currency_id = $currencyId AND precious_metal_id = $goldId");
-my @parts = split('-',!$silverLastDate ? '2002-01-01' : substr($silverLastDate, 0, 10));
+@parts = split('-',!$silverLastDate ? '2002-01-01' : substr($silverLastDate, 0, 10));
 $silverLastDate = DateTime->new(year => $parts[0], month => $parts[1], day => $parts[2]);
-my $today = DateTime->today();
 
 my $stmt_insert = $dbh->prepare("INSERT INTO ${prefix}precious_metal_fixings (precious_metal_id, currency_id, date, rate) VALUES (?,?,?,?)");
 
