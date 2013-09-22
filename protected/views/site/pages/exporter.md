@@ -14,4 +14,6 @@ Based on CGridView, so existing columns configuration from other actions could b
 
 ## Demo
 
+Exporter is used as an action called upon a click on a button of an EDataTable widget table toolbar.
 
+See the [toolbar demo page](/edatatables/toolbar) or [download a CSV file](/edatatables/export) directly.

@@ -18,15 +18,20 @@
  */
 return array (
   'Default theme' => 'Domyślny motyw',
+  'Demos' => 'Dema',
   'EDataTables' => 'EDataTables',
   'English' => 'Angielski',
   'Home' => 'Start',
   'Language' => 'Język',
+  'List' => 'Lista',
   'Login' => 'Zaloguj się',
   'Logout' => 'Wyloguj się',
   'Notifications' => 'Powiadomienia',
   'Polish' => 'Polski',
+  'Print' => 'Drukuj',
   'Profile' => 'Profil',
+  'Save as CSV' => 'Zapisz jako CSV',
   'Theme' => 'Motyw',
   'Twitter Bootstrap using yiistrap' => 'Twitter Bootstrap z użyciem yiistrap',
+  '{module} module' => 'Moduł {module}',
 );
