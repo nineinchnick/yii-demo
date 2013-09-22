@@ -59,8 +59,26 @@ class Controller extends CController
 		$themeItems = Controller::createMenuItemsUsingCurrentUrl($availableThemes, 'theme={key}');
 		$menuItems = array(
 			array(
-				'label'=>Yii::t('app','Home'),
+				'label'=>Yii::t('app','Demos'),
 				'url'=>array('/site/index'),
+				'items'=>array(
+					array(
+						'label'=>Yii::t('app','List'),
+						'url'=>array('/site/index'),
+					),
+					array(
+						'label'=>Yii::t('app','{module} module', array('{module}'=>'Usr')),
+						'url'=>array('/site/page', 'view'=>'usr'),
+					),
+					array(
+						'label'=>Yii::t('app','{module} module', array('{module}'=>'Nfy')),
+						'url'=>array('/site/page', 'view'=>'nfy'),
+					),
+					array(
+						'label'=>Yii::t('app','Exporter'),
+						'url'=>array('/site/page', 'view'=>'exporter'),
+					),
+				),
 			),
 			array(
 				'label'=>Yii::t('app','Notifications'),
@@ -69,6 +87,16 @@ class Controller extends CController
 			array(
 				'label'=>Yii::t('app','EDataTables'),
 				'url'=>array('/edatatables'),
+				'items'=>array(
+					array(
+						'label'=>Yii::t('app','Basic usage'),
+						'url'=>array('/edatatables/index'),
+					),
+					array(
+						'label'=>Yii::t('app','Toolbar buttons'),
+						'url'=>array('/edatatables/toolbar'),
+					),
+				),
 			),
 			array(
 				'label'=>Yii::t('app','Faker'),
