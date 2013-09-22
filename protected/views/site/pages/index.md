@@ -42,6 +42,12 @@ A grid view widget for exporting large amounts of data in various formats like C
 
 [Read more](/site/page?view=exporter).
 
+## Faker
+
+Not an extension, just a demo how to use the [Faker](https://github.com/fzaninotto/Faker) data generator class.
+
+Consists of a single controller that creates Faker and a view that displays examples.
+
 ## MdViewRenderer
 
 A simple view renderer has been added to allow writing static pages, like this one.
