@@ -35,6 +35,10 @@ return array(
 			'class'=>'vendors.nineinchnick.yii-usr.UsrModule',
 			'layout'=>'//layouts/column1',
 			'userIdentityClass' => 'UserIdentity',
+			'hybridauthProviders' => array(
+				'OpenID' => array('enabled'=>true),
+				'Facebook' => array('enabled'=>true, 'keys'=>array('id'=>'', 'secret'=>''), 'scope'=>'email'),
+			),
 		),
 	),
 	'components'=>array(
