@@ -21,6 +21,7 @@ This site is configured to present features like:
 * Password recovery
 * Force password reset after one day
 * Update own profile
+* Log in using Facebook account (using Hybridauth PHP library)
 
 ### Demo configuration
 
@@ -32,21 +33,27 @@ This site is configured to present features like:
 			'class'=>'vendors.nineinchnick.yii-usr.UsrModule',
 			'layout'=>'//layouts/column1',
 			'userIdentityClass' => 'UserIdentity',
+			'hybridauthProviders' => array(
+				'OpenID' => array('enabled'=>true),
+				'Facebook' => array('enabled'=>true, 'keys'=>array('id'=>'', 'secret'=>''), 'scope'=>'email'),
+			),
 		),
 	),
 ~~~
 
 ### Migrations
 
-Currently there is only one migration that creates the table for User model:
+Currently there are two migrations that creates the table for User and UserRemoteIdentity models:
 
-* [migrations/m130815_104658_create_table_user.php](https://github.com/nineinchnick/yii-demo/blob/master/protected/migrations/m130815_104658_create_table_user.php)
+* [migrations/m130701_104658_create_table_user.php](https://github.com/nineinchnick/yii-demo/blob/master/protected/migrations/m130701_104658_create_table_user.php)
+* [migrations/m130702_104658_create_table_user_remote_identity.php](https://github.com/nineinchnick/yii-demo/blob/master/protected/migrations/m130702_104658_create_table_user_remote_identity.php)
 
 ### Custom classes
 
-The module provides an example User model and matching UserIdentity implementation. They are located in:
+The module provides an example User and UserRemoteIdentity models and matching UserIdentity implementation. They are located in:
 
 * [models/User.php](https://github.com/nineinchnick/yii-demo/blob/master/protected/models/User.php)
+* [models/UserRemoteIdentity.php](https://github.com/nineinchnick/yii-demo/blob/master/protected/models/UserRemoteIdentity.php)
 * [components/UserIdentity.php](https://github.com/nineinchnick/yii-demo/blob/master/protected/components/UserIdentity.php)
 
-Most project specific logic is contained in the UserIdentity class.
+All project specific logic is contained in the UserIdentity class.
