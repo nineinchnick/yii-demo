@@ -46,6 +46,7 @@ class User extends CActiveRecord
 	public function relations()
 	{
 		return array(
+			'userRemoteIdentities' => array(self::HAS_MANY, 'UserRemoteIdentity', 'user_id'),
 		);
 	}
 
@@ -69,6 +70,10 @@ class User extends CActiveRecord
 		);
 	}
 
+	/**
+	 * @return CActiveDataProvider the data provider that can return the models
+	 * based on the search/filter conditions.
+	 */
 	public function search()
 	{
 		$criteria=new CDbCriteria;
@@ -93,6 +98,10 @@ class User extends CActiveRecord
 		));
 	}
 
+	/**
+	 * @param string $className active record class name.
+	 * @return UserRemoteIdentity the static model class
+	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
