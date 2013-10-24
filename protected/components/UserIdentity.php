@@ -87,8 +87,8 @@ class UserIdentity extends CUserIdentity implements IPasswordHistoryIdentity,IAc
 	{
 		$criteria = new CDbCriteria;
 		$criteria->with['userRemoteIdentities'] = array('alias'=>'ur');
-		$criteria->compare('ur.provider',$provider)
-		$criteria->compare('ur.identifier',$identifier)
+		$criteria->compare('ur.provider',$provider);
+		$criteria->compare('ur.identifier',$identifier);
 		$record = User::model()->find($criteria);
 		return $record === null ? null : self::createFromUser($record);
 	}
