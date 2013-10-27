@@ -35,6 +35,7 @@ return array(
 			'class'=>'vendors.nineinchnick.yii-usr.UsrModule',
 			'layout'=>'//layouts/column1',
 			'userIdentityClass' => 'UserIdentity',
+			'oneTimePasswordMode' => 'time',
 		),
 	),
 	'components'=>array(
