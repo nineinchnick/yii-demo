@@ -43,6 +43,7 @@ return array(
 				'OpenID' => array('enabled'=>true),
 				'Facebook' => array('enabled'=>true, 'keys'=>array('id'=>'123811837793982', 'secret'=>'f3c92e26abc3f770bcaeebc257e6213e'), 'scope'=>'email'),
 			),
+			'oneTimePasswordMode' => 'counter',
 		),
 	),
 	'components'=>array(
