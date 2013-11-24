@@ -49,6 +49,23 @@ class ApplicationConfigBehavior extends CBehavior
 		$availableThemes = Controller::getAvailableThemes();
 		$this->processOption('language', 'language', 'applicationLanguage', array_keys($availableLanguages), Yii::app()->getRequest()->getPreferredLanguage());
 		$this->processOption('theme', 'theme', 'applicationTheme', array_keys($availableThemes));
+		if (((is_string($this->owner->theme) && $this->owner->theme == 'bootstrap') || (is_object($this->owner->theme) && $this->owner->theme->name == 'bootstrap'))) {
+			// reconfigure the usr module for bootstrap theme, this cannot be done any other way
+			$modules = $this->owner->modules;
+			$modules['usr']['formClass'] = 'bootstrap.widgets.TbActiveForm';
+			$modules['usr']['detailViewClass'] = 'bootstrap.widgets.TbDetailView';
+			$modules['usr']['formCssClass'] = 'form well';
+			$modules['usr']['alertCssClassPrefix'] = 'alert alert-';
+			$modules['usr']['submitButtonCssClass'] = 'btn btn-primary';
+			$modules['usr']['htmlCss'] = array(
+				'errorSummaryCss' => 'alert alert-error',
+				'errorMessageCss' => 'text-error',
+			);
+			CHtml::$errorSummaryCss = 'alert alert-error';
+			CHtml::$errorMessageCss = 'text-error';
+			$this->owner->modules = $modules;
+
+		}
 		return true;
 	}
 

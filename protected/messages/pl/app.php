@@ -17,13 +17,18 @@
  * NOTE, this file must be saved in UTF-8 encoding.
  */
 return array (
+  'Basic usage' => 'Podstawowe użycie',
   'Default theme' => 'Domyślny motyw',
   'Demos' => 'Dema',
   'EDataTables' => 'EDataTables',
   'English' => 'Angielski',
+  'Exporter' => 'Exporter',
+  'Faker' => 'Faker',
+  'Grouping' => 'Grupowanie',
   'Home' => 'Start',
   'Language' => 'Język',
   'List' => 'Lista',
+  'Locale' => 'Lokalizacja',
   'Login' => 'Zaloguj się',
   'Logout' => 'Wyloguj się',
   'Notifications' => 'Powiadomienia',
@@ -32,6 +37,7 @@ return array (
   'Profile' => 'Profil',
   'Save as CSV' => 'Zapisz jako CSV',
   'Theme' => 'Motyw',
+  'Toolbar buttons' => 'Przyciski paska narzędziowego',
   'Twitter Bootstrap using yiistrap' => 'Twitter Bootstrap z użyciem yiistrap',
   '{module} module' => 'Moduł {module}',
 );
