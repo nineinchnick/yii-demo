@@ -24,6 +24,7 @@
  *
  * The followings are the available model relations:
  * @property UserRemoteIdentity[] $userRemoteIdentities
+ * @property UserUsedPassword[] $userUsedPassword
  */
 class User extends CActiveRecord
 {
@@ -52,6 +53,7 @@ class User extends CActiveRecord
 	{
 		return array(
 			'userRemoteIdentities' => array(self::HAS_MANY, 'UserRemoteIdentity', 'user_id'),
+			'userUsedPasswords' => array(self::HAS_MANY, 'UserUsedPassword', 'user_id', 'order'=>'set_on DESC'),
 		);
 	}
 
