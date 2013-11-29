@@ -25,7 +25,7 @@ class m130915_152207_add_country_and_currency_data extends CDbMigration
 			'code'=>'char(3) NOT NULL', // 8 ISO3166-1-Alpha-3
 			'telephone_prefix'=>'string', // 1 Dial
 			'currency_id'=>'integer REFERENCES {{currencies}} (id) ON DELETE RESTRICT ON UPDATE CASCADE',
-			'is_independent'=>'boolean NOT NULL DEFAULT YES', // 18
+			'is_independent'=>'boolean NOT NULL DEFAULT TRUE', // 18
 		));
 		$this->createTable('{{country_codes}}', array(
 			'country_id'=>'integer NOT NULL PRIMARY KEY REFERENCES {{countries}} (id) ON DELETE CASCADE ON UPDATE CASCADE',

@@ -36,6 +36,7 @@ return array(
 			'layout'=>'//layouts/column1',
 			'userIdentityClass' => 'UserIdentity',
 			'oneTimePasswordMode' => 'time',
+			'captcha' => array('clickableImage'=>true,'showRefreshButton'=>false),
 		),
 	),
 	'components'=>array(

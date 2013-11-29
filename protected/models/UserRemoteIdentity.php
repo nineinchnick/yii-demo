@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "{{user_remote_identity}}".
+ * This is the model class for table "{{user_remote_identities}}".
  *
- * The followings are the available columns in table '{{user_remote_identity}}':
+ * The followings are the available columns in table '{{user_remote_identities}}':
  * @property integer $id
  * @property integer $user_id
  * @property string $provider
@@ -21,7 +21,7 @@ class UserRemoteIdentity extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{user_remote_identity}}';
+		return '{{user_remote_identities}}';
 	}
 
 	/**
@@ -32,13 +32,18 @@ class UserRemoteIdentity extends CActiveRecord
 		return array(
 			array('user_id, provider, identifier', 'required'),
 			array('user_id', 'numerical', 'integerOnly'=>true),
-			array('provider, identifier', 'length', 'max'=>255),
-			array('user_id', 'unique', 'criteria'=>array(
-				'alias'=>'t',
-				'condition'=>'t.provider=:provider AND t.identifier=:identifier',
-				'params'=>array(':provider'=>$this->provider, ':identifier'=>$this->identifier)
-			)),
+			array('provider, identifier', 'length', 'max'=>100),
+			array('user_id', 'isUnique'),
 		);
+	}
+
+	public function isUnique($attribute, $params)
+	{
+		return 0 === $this->countByAttributes(array(
+			'user_id'=>$this->user_id,
+			'provider'=>$this->provider,
+			'identifier'=>$this->identifier,
+		));
 	}
 
 	/**
