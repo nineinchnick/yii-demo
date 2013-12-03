@@ -7,8 +7,8 @@ class m130702_104658_create_table_user_remote_identities extends CDbMigration
 		$this->createTable('{{user_remote_identities}}', array(
 			'id'=>'pk',
 			'user_id'=>'integer NOT NULL REFERENCES {{users}} (id) ON UPDATE CASCADE ON DELETE CASCADE',
-			'provider'=>'string NOT NULL',
-			'identifier'=>'string NOT NULL',
+			'provider'=>'varchar(100) NOT NULL',
+			'identifier'=>'varchar(100) NOT NULL',
 			'created_on'=>'timestamp NOT NULL',
 			'last_used_on'=>'timestamp',
 		));

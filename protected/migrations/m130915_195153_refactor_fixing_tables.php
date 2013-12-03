@@ -34,7 +34,7 @@ class m130915_195153_refactor_fixing_tables extends CDbMigration
 		));
 		$this->createIndex('{{precious_metal_fixings}}_currency_id_idx', '{{precious_metal_fixings}}', 'currency_id');
 		$this->createIndex('{{precious_metal_fixings}}_precious_metal_id_idx', '{{precious_metal_fixings}}', 'precious_metal_id');
-		$this->createIndex('{{precious_metal_fixings}}_date_currency_id_precious_metal_id_idx', '{{precious_metal_fixings}}', 'date, currency_id, precious_metal_id', true);
+		$this->createIndex('{{precious_metal_fixings}}_unique_idx', '{{precious_metal_fixings}}', 'date, currency_id, precious_metal_id', true);
 		$this->createIndex('{{precious_metal_fixings}}_date_idx', '{{precious_metal_fixings}}', 'date');
 
 

@@ -114,7 +114,7 @@ class UserIdentity extends CUserIdentity implements IPasswordHistoryIdentity,IAc
 			'user_id' => $this->_id,
 			'provider' => $provider,
 			'identifier' => $identifier,
-		));
+		), false);
 		return $model->save();
 	}
 
@@ -147,7 +147,7 @@ class UserIdentity extends CUserIdentity implements IPasswordHistoryIdentity,IAc
 		if ($this->_id===null)
 			return false;
 		if (($record=User::model()->findByPk($this->_id))!==null) {
-			return $record->is_active;
+			return (bool)$record->is_active;
 		}
 		return false;
 	}
@@ -157,7 +157,7 @@ class UserIdentity extends CUserIdentity implements IPasswordHistoryIdentity,IAc
 		if ($this->_id===null)
 			return false;
 		if (($record=User::model()->findByPk($this->_id))!==null) {
-			return $record->is_disabled;
+			return (bool)$record->is_disabled;
 		}
 		return false;
 	}
@@ -209,14 +209,11 @@ class UserIdentity extends CUserIdentity implements IPasswordHistoryIdentity,IAc
 
 	public function setAttributes(array $attributes)
 	{
-		if (isset($attributes['username']))
-			$this->username = $attributes['username'];
-		if (isset($attributes['email']))
-			$this->email = $attributes['email'];
-		if (isset($attributes['firstName']))
-			$this->firstName = $attributes['firstName'];
-		if (isset($attributes['lastName']))
-			$this->lastName = $attributes['lastName'];
+		$allowedAttributes = array('username','email','firstName','lastName');
+		foreach($attributes as $name=>$value) {
+			if (in_array($name, $allowedAttributes))
+				$this->$name = $value;
+		}
 		return true;
 	}
 
@@ -257,13 +254,13 @@ class UserIdentity extends CUserIdentity implements IPasswordHistoryIdentity,IAc
 		if (($record=User::model()->findByPk($this->_id))!==null) {
 			return array(
 				$record->one_time_password_code,
-				$record->one_time_password_counter,
+				$record->one_time_password_counter === null ? 1 : $record->one_time_password_counter,
 			);
 		}
 		return array(null, null);
 	}
 
-	public function setOneTimePassword($password, $counter = 0)
+	public function setOneTimePassword($password, $counter = 1)
 	{
 		if ($this->_id===null)
 			return false;
