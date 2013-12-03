@@ -6,7 +6,7 @@
 	vertical-align: text-top;
 	width: 16px;
 	height: 11px;
-	background:url(/images/flags.png) no-repeat
+	background:url(../images/flags.png) no-repeat
 }
 
 .flag.flag-en {background-position: -16px 0}
