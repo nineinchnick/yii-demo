@@ -30,16 +30,27 @@ return array(
 		'nfy'=>array(
 			'class'=>'vendors.nineinchnick.yii-nfy.NfyModule',
 			'longPolling'=>null,
+			'queues' => array('queue'),
 		),
 		'usr'=>array(
 			'class'=>'vendors.nineinchnick.yii-usr.UsrModule',
 			'layout'=>'//layouts/column1',
 			'userIdentityClass' => 'UserIdentity',
+			'passwordTimeout' => 1,
 			'oneTimePasswordMode' => 'time',
 			'captcha' => array('clickableImage'=>true,'showRefreshButton'=>false),
 		),
 	),
 	'components'=>array(
+		'authManager' => array(
+			'class'=>'CDbAuthManager',
+			'connectionID'	=> 'db',
+			'defaultRoles'	=> array('authenticated', 'guest'),
+			'showErrors'	=> YII_DEBUG,
+			'itemTable'		=> '{{auth_item}}',
+			'itemChildTable'=> '{{auth_item_child}}',
+			'assignmentTable'=> '{{auth_assignment}}',
+		),
 		'user'=>array(
 			'allowAutoLogin'=>true,
 			'loginUrl'=>array('/usr/login'),
@@ -48,7 +59,6 @@ return array(
 			'urlFormat'=>'path',
 			'showScriptName' => false,
 			'rules'=>array(
-				'usr/<action:(login|logout|reset|recovery|register|profile||password)>'=>'usr/default/<action>',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
@@ -58,6 +68,12 @@ return array(
 			'tablePrefix' => 'tbl_',
 			'enableParamLogging'=>true,
 			'initSQLs' => array('PRAGMA foreign_keys = ON'),
+		),
+		'queue' => array(
+			'class' => 'nfy.components.NfyDbQueue',
+			'id' => 'queue',
+			'name' => 'Notifications',
+			'timeout' => 30,
 		),
 		'errorHandler'=>array('errorAction'=>'site/error'),
 		'log'=>array(
