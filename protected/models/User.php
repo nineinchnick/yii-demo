@@ -128,11 +128,7 @@ class User extends CActiveRecord
 	}
 
 	protected function afterSave() {
-		Yii::import('nfy.models.NfyChannels');
-		foreach(NfyChannels::model()->findAll() as $channel) {
-			$channel->unsubscribe($this->id);
-			$channel->subscribe($this->id, 'db');
-		}
+		Yii::app()->queue->subscribe($this->id, 'notifications.*');
 	}
 
 	public static function hashPassword($password)
@@ -145,5 +141,10 @@ class User extends CActiveRecord
 	{
 		require(Yii::getPathOfAlias('usr.extensions').DIRECTORY_SEPARATOR.'password.php');
 		return $this->password !== null && password_verify($password, $this->password);
+	}
+
+	public function __toString()
+	{
+		return $this->firstname.' '.$this->lastname;
 	}
 }

@@ -57,7 +57,8 @@ class Controller extends CController
 		$availableThemes = Controller::getAvailableThemes();
 		$languageItems = Controller::createMenuItemsUsingCurrentUrl($availableLanguages, 'language={key}', '<i class="flag flag-{key}"></i> {value}');
 		$themeItems = Controller::createMenuItemsUsingCurrentUrl($availableThemes, 'theme={key}');
-		$menuItems = array(
+
+		$mainMenuItems = array(
 			array(
 				'label'=>Yii::t('app','Demos'),
 				'url'=>array('/site/index'),
@@ -96,12 +97,20 @@ class Controller extends CController
 						'label'=>Yii::t('app','Toolbar buttons'),
 						'url'=>array('/edatatables/toolbar'),
 					),
+                    array(
+                        'label'=>Yii::t('app','Grouping'),
+                        'url'=>array('/edatatables/report'),
+                    ),
 				),
 			),
 			array(
 				'label'=>Yii::t('app','Faker'),
 				'url'=>array('/faker'),
 			),
+		);
+
+		$messagesWidget = $c->widget('nfy.components.MessagesWidget', array('messages' => Yii::app()->queue->peek(Yii::app()->user->getId())));
+		$userMenuItems = array(
 			array(
 				'label'=>Yii::t('app','Login'),
 				'url'=>array('/usr/login'),
@@ -117,6 +126,10 @@ class Controller extends CController
 				'url'=>array('/usr/profile'),
 				'visible'=>!Yii::app()->user->isGuest,
 			),
+			$messagesWidget->createMenuItem(),
+		);
+
+		$appMenuItems = array(
 			array(
 				'label'=>'<i class="flag flag-'.Yii::app()->language.'"></i> '.Yii::t('app','Language'),
 				'url'=>'#',
@@ -129,6 +142,7 @@ class Controller extends CController
 				'items'=>$themeItems,
 			),
 		);
-		return $menuItems; 
+
+		return array_merge($mainMenuItems, $userMenuItems, $appMenuItems);
 	}
 }

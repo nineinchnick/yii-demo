@@ -57,11 +57,12 @@
 <?php if (!Yii::app()->user->isGuest): ?>
 <?php Yii::import('nfy.extensions.webNotifications.WebNotifications'); ?>
 <?php $this->widget('nfy.extensions.webNotifications.WebNotifications', array(
-	//'url'=>$this->createUrl('/nfy/default/poll'),
-	'url'=>'ws://ws.pusherapp.com:80/app/fb580666833f03a21f05?client=socket.io&protocol=6',
-	'method'=>WebNotifications::METHOD_PUSH,
+	//'url'=>$this->createUrl('/nfy/default/poll', array('id'=>'queue')),
+	//'url'=>'ws://ws.pusherapp.com:80/app/fb580666833f03a21f05?client=socket.io&protocol=6',
+	'method'=>WebNotifications::METHOD_POLL,
+	//'method'=>WebNotifications::METHOD_PUSH,
 	'websocket'=>array(
-		'onopen'=>'js:function(_socket){return function(e) {
+		/*'onopen'=>'js:function(_socket){return function(e) {
 			_socket.send(JSON.stringify({
 				"event": "pusher:subscribe",
 				"data": {"channel": "test_channel"}
@@ -74,7 +75,7 @@
 				notificationsPoller.addMessage(data);
 				notificationsPoller.display();
 			}
-		};}',
+		};}',*/
 	),
 )); ?>
 <?php endif; ?>
