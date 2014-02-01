@@ -13,6 +13,7 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'nfy.components.*',
 	),
 	'modules'=>array(
 		'nfy'=>array(
@@ -34,6 +35,20 @@ return array(
 			'tablePrefix' => 'tbl_',
 			'enableParamLogging'=>true,
 			'initSQLs' => array('PRAGMA foreign_keys = ON'),
+		),
+		'sysv' => array(
+			'class' => 'nfy.components.NfySysVQueue',
+			'id' => 'a',
+			'label' => 'IPC queue',
+		),
+		'redis' => array(
+			'class' => 'nfy.extensions.NfyRedisConnection',
+		),
+		'redisQueue' => array(
+			'class' => 'nfy.components.NfyRedisQueue',
+			'id' => 'mq',
+			'label' => 'Redis queue',
+			'redis' => 'redis',
 		),
 		'log'=>array(
 			'class'=>'CLogRouter',

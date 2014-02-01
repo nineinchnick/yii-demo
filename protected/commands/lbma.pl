@@ -22,7 +22,7 @@ Log::Log4perl->easy_init();
 
 my $lbma =  LBMA::Statistics->new();
 
-my $dbh = DBI->connect($connectionString, $dbuser, $dbpass, {AutoCommit => 0}) or die ('Cant connect to database.');
+my $dbh = DBI->connect($connectionString, $dbuser, $dbpass, {AutoCommit => 1}) or die ('Cant connect to database.');
 
 my $currencyId = $dbh->selectrow_array("SELECT id FROM ${prefix}currencies WHERE code = 'USD'");
 my $goldId = $dbh->selectrow_array("SELECT id FROM ${prefix}precious_metals WHERE name = 'Gold'");
@@ -38,25 +38,27 @@ my $silverLastDate = $dbh->selectrow_array("SELECT max(date) FROM ${prefix}preci
 @parts = split('-',!$silverLastDate ? '2002-01-01' : substr($silverLastDate, 0, 10));
 $silverLastDate = DateTime->new(year => $parts[0], month => $parts[1], day => $parts[2]);
 
+print "Fetching gold since $goldLastDate and silver since $silverLastDate\n";
+
 my $stmt_insert = $dbh->prepare("INSERT INTO ${prefix}precious_metal_fixings (precious_metal_id, currency_id, date, rate) VALUES (?,?,?,?)");
 
 while ( $goldLastDate->add(days => 1) <= $today ) {
-	print "Checking ",$goldLastDate;
+	print "Checking gold fixing at ",$goldLastDate;
 	my @fixing = $lbma->dailygoldfixing( year => $goldLastDate->year(), month => $goldLastDate->month(), day => $goldLastDate->day());
 	if (@fixing) {
-		$stmt_insert->execute($goldId, $currencyId, $goldLastDate->ymd('-'), $fixing[1]*100);
+		$stmt_insert->execute($goldId, $currencyId, $goldLastDate->ymd('-').' 00:00:00', $fixing[1]*100);
 	}
 }
 
 while ( $silverLastDate->add(days => 1) <= $today ) {
-	print "Checking ",$silverLastDate;
+	print "Checking silver fixing at ",$silverLastDate;
 	my @fixing = $lbma->dailysilverfixing( year => $silverLastDate->year(), month => $silverLastDate->month(), day => $silverLastDate->day());
 	if (@fixing) {
-		$stmt_insert->execute($silverId, $currencyId, $silverLastDate->ymd('-'), $fixing[1]*100);
+		$stmt_insert->execute($silverId, $currencyId, $silverLastDate->ymd('-').' 00:00:00', $fixing[1]*100);
 	}
 }
 
 #$dbh->rollback;
-$dbh->commit;
+#$dbh->commit;
 $dbh->disconnect;
 

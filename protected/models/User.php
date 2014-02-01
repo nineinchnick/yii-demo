@@ -25,14 +25,21 @@
  * The followings are the available model relations:
  * @property UserRemoteIdentity[] $userRemoteIdentities
  * @property UserUsedPassword[] $userUsedPassword
+ * @property UserProfilePicture[] $userProfilePictures
  */
 class User extends CActiveRecord
 {
+	/**
+	 * @inheritdoc
+	 */
 	public function tableName()
 	{
 		return '{{users}}';
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function rules()
 	{
 		// password is unsafe on purpose, assign it manually after hashing only if not empty
@@ -49,14 +56,21 @@ class User extends CActiveRecord
 		);
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function relations()
 	{
 		return array(
 			'userRemoteIdentities' => array(self::HAS_MANY, 'UserRemoteIdentity', 'user_id'),
 			'userUsedPasswords' => array(self::HAS_MANY, 'UserUsedPassword', 'user_id', 'order'=>'set_on DESC'),
+			'userProfilePictures' => array(self::HAS_MANY, 'UserProfilePicture', 'user_id'),
 		);
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function attributeLabels()
 	{
 		return array(
@@ -74,9 +88,9 @@ class User extends CActiveRecord
 			'email_verified' => Yii::t('models', 'Email Verified'),
 			'is_active' => Yii::t('models', 'Is Active'),
 			'is_disabled' => Yii::t('models', 'Is Disabled'),
-			'one_time_password_secret' => 'One Time Password Secret',
-			'one_time_password_code' => 'One Time Password Code',
-			'one_time_password_counter' => 'One Time Password Counter',
+			'one_time_password_secret' => Yii::t('models', 'One Time Password Secret'),
+			'one_time_password_code' => Yii::t('models', 'One Time Password Code'),
+			'one_time_password_counter' => Yii::t('models', 'One Time Password Counter'),
 		);
 	}
 
@@ -117,6 +131,9 @@ class User extends CActiveRecord
 		return parent::model($className);
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	protected function beforeSave()
 	{
 		if ($this->isNewRecord) {

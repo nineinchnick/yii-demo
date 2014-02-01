@@ -30,7 +30,7 @@ return array(
 		'nfy'=>array(
 			'class'=>'vendors.nineinchnick.yii-nfy.NfyModule',
 			'longPolling'=>null,
-			'queues' => array('queue'),
+			'queues' => array('queue', 'sysv', 'redisQueue'),
 		),
 		'usr'=>array(
 			'class'=>'vendors.nineinchnick.yii-usr.UsrModule',
@@ -46,6 +46,9 @@ return array(
 			),
 			'oneTimePasswordMode' => 'counter',
 			'captcha' => array('clickableImage'=>true,'showRefreshButton'=>false),
+			'pictureUploadRules' => array(
+				array('file', 'allowEmpty' => true, 'types'=>'jpg, gif, png', 'maxSize'=>2*1024*1024, 'safe' => false, 'maxFiles' => 1),
+			),
 		),
 	),
 	'components'=>array(
@@ -79,8 +82,22 @@ return array(
 		'queue' => array(
 			'class' => 'nfy.components.NfyDbQueue',
 			'id' => 'queue',
-			'name' => 'Notifications',
+			'label' => 'Notifications',
 			'timeout' => 30,
+		),
+		'sysv' => array(
+			'class' => 'nfy.components.NfySysVQueue',
+			'id' => 'a',
+			'label' => 'IPC queue',
+		),
+		'redis' => array(
+			'class' => 'nfy.extensions.NfyRedisConnection',
+		),
+		'redisQueue' => array(
+			'class' => 'nfy.components.NfyRedisQueue',
+			'id' => 'mq',
+			'label' => 'Redis queue',
+			'redis' => 'redis',
 		),
 		'errorHandler'=>array('errorAction'=>'site/error'),
 		'log'=>array(

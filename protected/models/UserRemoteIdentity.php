@@ -17,7 +17,7 @@
 class UserRemoteIdentity extends CActiveRecord
 {
 	/**
-	 * @return string the associated database table name
+	 * @inheritdoc
 	 */
 	public function tableName()
 	{
@@ -37,6 +37,13 @@ class UserRemoteIdentity extends CActiveRecord
 		);
 	}
 
+	/**
+	 * An inline validator that checkes if there are no existing records
+	 * with same provider and identifier for specified user.
+	 * @param string $attribute
+	 * @param array $params
+	 * @return boolean
+	 */
 	public function isUnique($attribute, $params)
 	{
 		return 0 === $this->countByAttributes(array(
@@ -57,40 +64,18 @@ class UserRemoteIdentity extends CActiveRecord
 	}
 
 	/**
-	 * @return array customized attribute labels (name=>label)
+	 * @inheritdoc
 	 */
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'user_id' => 'User',
-			'provider' => 'Provider',
-			'identifier' => 'Identifier',
-			'created_on' => 'Created On',
-			'last_used_on' => 'Last Used On',
+			'id' => Yii::t('models', 'ID'),
+			'user_id' => Yii::t('models', 'User'),
+			'provider' => Yii::t('models', 'Provider'),
+			'identifier' => Yii::t('models', 'Identifier'),
+			'created_on' => Yii::t('models', 'Created On'),
+			'last_used_on' => Yii::t('models', 'Last Used On'),
 		);
-	}
-
-	/**
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id);
-		$criteria->compare('user_id',$this->user_id);
-		$criteria->compare('provider',$this->provider,true);
-		$criteria->compare('identifier',$this->identifier,true);
-		//$criteria->compare('created_on',$this->created_on,true);
-		//$criteria->compare('last_used_on',$this->last_used_on,true);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
 	}
 
 	/**
