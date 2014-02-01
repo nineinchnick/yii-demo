@@ -109,7 +109,7 @@ class Controller extends CController
 			),
 		);
 
-		$messagesWidget = $c->widget('nfy.components.MessagesWidget', array('messages' => Yii::app()->queue->peek(Yii::app()->user->getId())));
+		$messagesWidget = $c->widget('nfy.components.MessagesWidget', array('messages' => array('queue' => Yii::app()->queue->peek(Yii::app()->user->getId()))));
 		$userMenuItems = array(
 			array(
 				'label'=>Yii::t('app','Login'),
