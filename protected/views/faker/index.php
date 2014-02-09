@@ -16,7 +16,7 @@
         <?php echo CHtml::label(Yii::t('app','Records number'),'records'); ?>
         <?php echo CHtml::textField('records', $records) ?>
         <?php echo CHtml::submitButton('Export as CSV', array('name'=>'export')); ?>
-		<p class="hint"><?php echo Yii:t('app', 'Records number is limited to {number}.', array('{number}'=>1000)); ?></p>
+		<p class="hint"><?php echo Yii::t('app', 'Records number is limited to {number}.', array('{number}'=>1000)); ?></p>
     </div>
 <?php echo CHtml::endForm(); ?>
 </div><!-- form -->
