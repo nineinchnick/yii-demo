@@ -40,4 +40,7 @@ return array (
   'Toolbar buttons' => 'Przyciski paska narzędziowego',
   'Twitter Bootstrap using yiistrap' => 'Twitter Bootstrap z użyciem yiistrap',
   '{module} module' => 'Moduł {module}',
+  'Records number' => 'Liczba rekordóOD',
+  'Records number is limited to {number}.' => 'Liczba rekordóOD jest ograniczona do {number}.',
+  'Export as CSV' => 'Pobierz jako CSV',
 );
