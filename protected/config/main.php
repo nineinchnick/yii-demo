@@ -25,7 +25,7 @@ return array(
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'NilDewarEtherDownCliff',
-			'ipFilters'=>array('127.0.0.1','::1'),
+			'ipFilters'=>array('127.0.0.1','::1','109.231.21.20'),
 		),
 		'nfy'=>array(
 			'class'=>'vendors.nineinchnick.yii-nfy.NfyModule',
@@ -45,7 +45,7 @@ return array(
 				'Facebook' => array('enabled'=>true, 'keys'=>array('id'=>'123811837793982', 'secret'=>'f3c92e26abc3f770bcaeebc257e6213e'), 'scope'=>'email'),
 			),
 			'oneTimePasswordMode' => 'counter',
-			'captcha' => array('clickableImage'=>true,'showRefreshButton'=>false),
+			'captcha' => array('captchaAction'=>'default/captcha','clickableImage'=>true,'showRefreshButton'=>false),
 			'pictureUploadRules' => array(
 				array('file', 'allowEmpty' => true, 'types'=>'jpg, gif, png', 'maxSize'=>2*1024*1024, 'safe' => false, 'maxFiles' => 1),
 			),
