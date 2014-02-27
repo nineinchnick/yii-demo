@@ -19,7 +19,7 @@ return array(
 		'/i18n/data',
 		'/data',
 		'/messages',
-		'/vendors',
+		'/vendor',
 		'/tests',
 		'/runtime',
 		'/modules',

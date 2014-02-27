@@ -10,8 +10,8 @@ return array(
 	'language'		=> 'en',
 
 	'aliases'		=> array(
-		'vendors' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'vendors',
-		'Faker' => 'application.vendors.fzaninotto.faker.src.Faker',
+		'vendor' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'vendor',
+		'Faker' => 'application.vendor.fzaninotto.faker.src.Faker',
 		'bootstrap' => 'ext.bootstrap',
 	),
 	'preload'=>array('log'),
@@ -28,12 +28,12 @@ return array(
 			'ipFilters'=>array('127.0.0.1','::1','109.231.21.20'),
 		),
 		'nfy'=>array(
-			'class'=>'vendors.nineinchnick.yii-nfy.NfyModule',
+			'class'=>'vendor.nineinchnick.yii-nfy.NfyModule',
 			'longPolling'=>null,
 			'queues' => array('queue', 'sysv', 'redisQueue'),
 		),
 		'usr'=>array(
-			'class'=>'vendors.nineinchnick.yii-usr.UsrModule',
+			'class'=>'vendor.nineinchnick.yii-usr.UsrModule',
 			'layout'=>'//layouts/column1',
 			'userIdentityClass' => 'UserIdentity',
 			'mailerConfig' => array(
@@ -108,7 +108,7 @@ return array(
 		),
 		'viewRenderer' => array('class'=>'MdViewRenderer'),
 		'bootstrap' => array(
-			'class' => 'bootstrap.components.TbApi',   
+			'class' => 'bootstrap.components.TbApi',
 		),
 		'widgetFactory'=>array(
 			'enableSkin'=>true,

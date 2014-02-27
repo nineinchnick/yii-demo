@@ -1,15 +1,13 @@
 <?php
 
-//Yii::setPathOfAlias('vendors',dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'vendors');
-
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Widgets and Extensions demo',
 	'preload'=>array('log'),
 	'aliases'		=> array(
-		'vendors' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'vendors',
-		'nfy'=>'vendors.nineinchnick.yii-nfy',
-		'usr'=>'vendors.nineinchnick.yii-usr',
+		'vendor' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'vendor',
+		'nfy'=>'vendor.nineinchnick.yii-nfy',
+		'usr'=>'vendor.nineinchnick.yii-usr',
 	),
 	'import'=>array(
 		'application.models.*',
@@ -18,10 +16,10 @@ return array(
 	),
 	'modules'=>array(
 		'nfy'=>array(
-			'class'=>'vendors.nineinchnick.yii-nfy.NfyModule',
+			'class'=>'vendor.nineinchnick.yii-nfy.NfyModule',
 		),
 		'usr'=>array(
-			'class'=>'vendors.nineinchnick.yii-usr.UsrModule',
+			'class'=>'vendor.nineinchnick.yii-usr.UsrModule',
 			'userIdentityClass' => 'UserIdentity',
 		),
 	),
