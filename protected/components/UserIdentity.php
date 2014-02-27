@@ -77,12 +77,12 @@ class UserIdentity extends CUserIdentity
 		}
 		return $this->getIsAuthenticated();
 	}
-	
+
 	public function setId($id)
 	{
 		$this->_id = $id;
 	}
-	
+
 	/**
 	 * @return int|string current user ID
 	 */
@@ -214,10 +214,17 @@ class UserIdentity extends CUserIdentity
 
 	// {{{ ActivatedIdentityInterface
 
+    /**
+     * @inheritdoc
+     */
 	public static function find(array $attributes)
 	{
-		$record = User::model()->findByAttributes($attributes);
-		return $record === null ? null : self::createFromUser($record);
+		$records = User::model()->findAllByAttributes($attributes);
+        if (count($records)!==1) {
+            return null;
+        }
+        $record = reset($records);
+		return self::createFromUser($record);
 	}
 
 	/**
@@ -303,10 +310,10 @@ class UserIdentity extends CUserIdentity
 		if (($record=$this->getActiveRecord())===null) {
 			return false;
 		}
-		/** 
-		 * Only update $record if it's not already been updated, otherwise 
-		 * saveAttributes will return false, incorrectly suggesting 
-		 * failure.  
+		/**
+		 * Only update $record if it's not already been updated, otherwise
+		 * saveAttributes will return false, incorrectly suggesting
+		 * failure.
 		 */
 		if (!$record->email_verified) {
 			$attributes = array('email_verified' => 1);
@@ -320,7 +327,7 @@ class UserIdentity extends CUserIdentity
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Returns user email address.
 	 * @return string
@@ -361,7 +368,7 @@ class UserIdentity extends CUserIdentity
 
 	/**
 	 * Returns previously used one time password and value of counter used to generate current one time password, used in counter mode.
-	 * @return array array(string, integer) 
+	 * @return array array(string, integer)
 	 */
 	public function getOneTimePassword()
 	{
@@ -419,6 +426,7 @@ class UserIdentity extends CUserIdentity
 	{
 		if ($this->_id===null)
 			return false;
+        self::removeRemoteIdentity($provider, $identifier);
 		$model = new UserRemoteIdentity;
 		$model->setAttributes(array(
 			'user_id' => $this->_id,
@@ -427,6 +435,36 @@ class UserIdentity extends CUserIdentity
 		), false);
 		return $model->save();
 	}
+
+    /**
+     * @inheritdoc
+     */
+    public static function removeRemoteIdentity($provider, $identifier)
+    {
+		if ($this->_id===null)
+			return false;
+		$criteria = new CDbCriteria;
+		$criteria->compare('provider',$provider);
+		$criteria->compare('identifier',$identifier);
+		UserRemoteIdentity::model()->deleteAll($criteria);
+        return true;
+    }
+
+    /**
+     * Similar to @see getAttributes() but reads the remote profile instead of current identity.
+     * @param mixed $remoteProfie
+     * @return array
+     */
+    public static function getRemoteAttributes($remoteProfile)
+    {
+		$email = (isset($remoteProfile->emailVerifier) && $remoteProfile->emailVerifier !== null) ? $remoteProfile->emailVerifier : $remoteProfile->email;
+        return array(
+            'username' => $email,
+            'email' => $email,
+            'firstName' => $remoteProfile->firstName,
+            'lastName' => $remoteProfile->lastName,
+        );
+    }
 
 	// }}}
 
