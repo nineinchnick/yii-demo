@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "021f083661916a58a30cdd96c569a2a8",
+    "hash": "39b77ba5bc956d18f46d504ebf8ba580",
     "packages": [
         {
             "name": "crisu83/yiistrap",
@@ -11,24 +11,32 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Crisu83/yiistrap.git",
-                "reference": "d8c1e959f133bf9a03e776f23ff672a64a2c6208"
+                "reference": "f9cc90770d57aa48fde0dcb0a1a10481d3c146b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Crisu83/yiistrap/zipball/d8c1e959f133bf9a03e776f23ff672a64a2c6208",
-                "reference": "d8c1e959f133bf9a03e776f23ff672a64a2c6208",
+                "url": "https://api.github.com/repos/Crisu83/yiistrap/zipball/f9cc90770d57aa48fde0dcb0a1a10481d3c146b5",
+                "reference": "f9cc90770d57aa48fde0dcb0a1a10481d3c146b5",
                 "shasum": ""
             },
             "require-dev": {
                 "codeception/codeception": "@stable",
-                "crisu83/yii-composer": "dev-master",
-                "php": ">=5.3.0",
-                "yiisoft/yii": "1.1.13"
+                "crisu83/yii-composer": ">=1.0.0",
+                "yiisoft/yii": ">=1.1.13"
             },
             "type": "library",
             "extra": {
                 "yii-install-writable": [
                     "tests/_log"
+                ]
+            },
+            "autoload": {
+                "classmap": [
+                    "behaviors/",
+                    "components/",
+                    "form/",
+                    "helpers/",
+                    "widgets/"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -52,7 +60,7 @@
                 "bootstrap",
                 "yii"
             ],
-            "time": "2013-09-06 08:48:52"
+            "time": "2014-02-24 07:53:45"
         },
         {
             "name": "fzaninotto/faker",
@@ -60,12 +68,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "836a757943d9fc4dff0b98e6deb57b7f0cad1044"
+                "reference": "61a62d67ec2d5a19aa653ffe411f312e306556be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/836a757943d9fc4dff0b98e6deb57b7f0cad1044",
-                "reference": "836a757943d9fc4dff0b98e6deb57b7f0cad1044",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/61a62d67ec2d5a19aa653ffe411f312e306556be",
+                "reference": "61a62d67ec2d5a19aa653ffe411f312e306556be",
                 "shasum": ""
             },
             "require": {
@@ -74,7 +82,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3.x-dev"
+                    "dev-master": "1.4.x-dev"
                 }
             },
             "autoload": {
@@ -98,7 +106,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2013-10-24 09:48:56"
+            "time": "2014-02-24 21:51:30"
         },
         {
             "name": "nineinchnick/edatatables",
@@ -106,12 +114,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nineinchnick/edatatables.git",
-                "reference": "cd05f5f2dad1fc8425f6ae8271887c7cec0e0251"
+                "reference": "e29deebdd6393188f779855efaa3a524d79f338c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nineinchnick/edatatables/zipball/cd05f5f2dad1fc8425f6ae8271887c7cec0e0251",
-                "reference": "cd05f5f2dad1fc8425f6ae8271887c7cec0e0251",
+                "url": "https://api.github.com/repos/nineinchnick/edatatables/zipball/e29deebdd6393188f779855efaa3a524d79f338c",
+                "reference": "e29deebdd6393188f779855efaa3a524d79f338c",
                 "shasum": ""
             },
             "require": {
@@ -130,7 +138,7 @@
                 }
             ],
             "description": "Grid widget for the Yii Framework, wrapper for the DataTables jQuery plugin",
-            "time": "2013-09-13 10:03:26"
+            "time": "2014-02-27 18:48:11"
         },
         {
             "name": "nineinchnick/select2",
@@ -169,12 +177,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nineinchnick/yii-exporter.git",
-                "reference": "f97b0ac7c17c4f5304c3b8d8aa77e97e23af7fe6"
+                "reference": "278e2ec4ad83cf63c9e38e63190f5d40bc84165e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nineinchnick/yii-exporter/zipball/f97b0ac7c17c4f5304c3b8d8aa77e97e23af7fe6",
-                "reference": "f97b0ac7c17c4f5304c3b8d8aa77e97e23af7fe6",
+                "url": "https://api.github.com/repos/nineinchnick/yii-exporter/zipball/278e2ec4ad83cf63c9e38e63190f5d40bc84165e",
+                "reference": "278e2ec4ad83cf63c9e38e63190f5d40bc84165e",
                 "shasum": ""
             },
             "type": "library",
@@ -190,7 +198,7 @@
                 }
             ],
             "description": "A widget for the Yii framework for exporting data.",
-            "time": "2013-09-22 08:39:46"
+            "time": "2014-02-03 16:48:31"
         },
         {
             "name": "nineinchnick/yii-nfy",
@@ -198,12 +206,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nineinchnick/yii-nfy.git",
-                "reference": "69a17070113fde9617ec894b964092ba67bc0a83"
+                "reference": "fe8d8981f6836955520738ca2b5bab62e2e22f67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nineinchnick/yii-nfy/zipball/69a17070113fde9617ec894b964092ba67bc0a83",
-                "reference": "69a17070113fde9617ec894b964092ba67bc0a83",
+                "url": "https://api.github.com/repos/nineinchnick/yii-nfy/zipball/fe8d8981f6836955520738ca2b5bab62e2e22f67",
+                "reference": "fe8d8981f6836955520738ca2b5bab62e2e22f67",
                 "shasum": ""
             },
             "require": {
@@ -212,7 +220,7 @@
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD-3-Clause"
+                "MIT"
             ],
             "authors": [
                 {
@@ -222,7 +230,7 @@
                 }
             ],
             "description": "Yii framework module for ending notifications and displaying them using web notifications and ajax polling.",
-            "time": "2013-10-23 21:32:58"
+            "time": "2014-02-27 18:47:50"
         },
         {
             "name": "nineinchnick/yii-usr",
@@ -230,12 +238,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nineinchnick/yii-usr.git",
-                "reference": "e38944f0a75eec7b9093d26ed9ab99f90aa16973"
+                "reference": "8a12538a666f202080a351cf03a3e817e65df796"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nineinchnick/yii-usr/zipball/e38944f0a75eec7b9093d26ed9ab99f90aa16973",
-                "reference": "e38944f0a75eec7b9093d26ed9ab99f90aa16973",
+                "url": "https://api.github.com/repos/nineinchnick/yii-usr/zipball/8a12538a666f202080a351cf03a3e817e65df796",
+                "reference": "8a12538a666f202080a351cf03a3e817e65df796",
                 "shasum": ""
             },
             "require": {
@@ -254,7 +262,70 @@
                 }
             ],
             "description": "Yii framework module for user authentication, password reset, registration and profile updating.",
-            "time": "2013-10-24 18:59:27"
+            "time": "2014-02-26 13:16:43"
+        },
+        {
+            "name": "pdepend/pdepend",
+            "version": "1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pdepend/pdepend.git",
+                "reference": "1537f19d62d7b30c13ac173270106df7c6b9c459"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pdepend/pdepend/zipball/1537f19d62d7b30c13ac173270106df7c6b9c459",
+                "reference": "1537f19d62d7b30c13ac173270106df7c6b9c459",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.3"
+            },
+            "bin": [
+                "src/bin/pdepend"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHP_": "src/main/php/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Official version of pdepend to be handled with Composer",
+            "time": "2013-12-04 17:46:00"
+        },
+        {
+            "name": "phpmd/phpmd",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpmd/phpmd.git",
+                "reference": "692b7b1b64518091b2b1bea91b489dbb13598c07"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpmd/phpmd/zipball/692b7b1b64518091b2b1bea91b489dbb13598c07",
+                "reference": "692b7b1b64518091b2b1bea91b489dbb13598c07",
+                "shasum": ""
+            },
+            "require": {
+                "pdepend/pdepend": ">=1.1.1",
+                "php": ">=5.3.0"
+            },
+            "bin": [
+                "src/bin/phpmd"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "../../pdepend/pdepend/src/main/php",
+                "src/main/php"
+            ],
+            "description": "Official version of PHPMD handled with Composer.",
+            "time": "2013-07-26 14:47:02"
         },
         {
             "name": "yiisoft/yii",

@@ -1,4 +1,5 @@
-protected/vendors
+protected/vendor
 protected/runtime
 protected/data/testdrive.db
 assets
+.idea

@@ -39,6 +39,9 @@ class EdatatablesController extends Controller
 		$model->unsetAttributes();
 
 		$columns = $this->columns();
+        /**
+         * @var $widget EDataTables
+         */
 		$widget=$this->createWidget('ext.EDataTables.EDataTables', array(
 			'id'            => 'goldFixing',
 			'dataProvider'  => $model->search($columns),
@@ -66,6 +69,9 @@ class EdatatablesController extends Controller
 		$dataProvider = $model->search($columns);
 		if ($print !== null)
 			$dataProvider->setPagination(false);
+        /**
+         * @var $widget EDataTables
+         */
 		$widget=$this->createWidget('ext.EDataTables.EDataTables', array(
 			'id'            => 'goldFixing',
 			'dataProvider'  => $dataProvider,
@@ -98,4 +104,9 @@ class EdatatablesController extends Controller
 		else
 			$this->render('toolbar', array('widget' => $widget,));
 	}
+
+    public function actionReport()
+    {
+
+    }
 }

@@ -13,7 +13,8 @@ class UserIdentity extends CUserIdentity
 	IEditableIdentity,
 	IHybridauthIdentity,
 	IOneTimePasswordIdentity,
-	IPictureIdentity
+	IPictureIdentity,
+	IManagedIdentity
 {
 	const ERROR_USER_DISABLED=1000;
 	const ERROR_USER_INACTIVE=1001;
@@ -22,6 +23,7 @@ class UserIdentity extends CUserIdentity
 	public $firstName = null;
 	public $lastName = null;
 	private $_id = null;
+	private $_activeRecord = null;
 
 	protected static function createFromUser(User $user)
 	{
@@ -32,11 +34,20 @@ class UserIdentity extends CUserIdentity
 
 	protected function initFromUser(User $user)
 	{
-		$this->id = $user->id;
+		$this->_activeRecord = $user;
+		$this->id = $user->getPrimaryKey();
 		$this->username = $user->username;
 		$this->email = $user->email;
 		$this->firstName = $user->firstname;
 		$this->lastName = $user->lastname;
+	}
+
+	protected function getActiveRecord()
+	{
+		if ($this->_activeRecord === null && $this->_id !== null) {
+			$this->_activeRecord = User::model()->findByPk($this->_id);
+		}
+		return $this->_activeRecord;
 	}
 
 	// {{{ IUserIdentity
@@ -92,7 +103,7 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function getPasswordDate($password = null)
 	{
-		if ($this->_id === null || ($record=User::model()->findByPk($this->_id)) === null)
+		if (($record=$this->getActiveRecord()) === null)
 			return null;
 
 		if ($password === null) {
@@ -114,22 +125,20 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function resetPassword($password)
 	{
-		if ($this->_id===null)
+		if (($record=$this->getActiveRecord())===null) {
 			return false;
-		if (($record=User::model()->findByPk($this->_id))!==null) {
-			$hashedPassword = User::hashPassword($password);
-			$usedPassword = new UserUsedPassword;
-			$usedPassword->setAttributes(array(
-				'user_id'=>$this->_id,
-				'password'=>$hashedPassword,
-				'set_on'=>date('Y-m-d H:i:s'),
-			), false);
-			return $usedPassword->save() && $record->saveAttributes(array(
-				'password'=>$hashedPassword,
-				'password_set_on'=>date('Y-m-d H:i:s'),
-			));
 		}
-		return false;
+		$hashedPassword = User::hashPassword($password);
+		$usedPassword = new UserUsedPassword;
+		$usedPassword->setAttributes(array(
+			'user_id'=>$this->_id,
+			'password'=>$hashedPassword,
+			'set_on'=>date('Y-m-d H:i:s'),
+		), false);
+		return $usedPassword->save() && $record->saveAttributes(array(
+			'password'=>$hashedPassword,
+			'password_set_on'=>date('Y-m-d H:i:s'),
+		));
 	}
 
 	// }}}
@@ -150,7 +159,7 @@ class UserIdentity extends CUserIdentity
 			$record->password = 'x';
 			$record->is_active = $requireVerifiedEmail ? 0 : 1;
 		} else {
-			$record = User::model()->findByPk($this->_id);
+			$record = $this->getActiveRecord();
 		}
 		if ($record!==null) {
 			$record->setAttributes(array(
@@ -161,6 +170,7 @@ class UserIdentity extends CUserIdentity
 			));
 			if ($record->save()) {
 				$this->_id = $record->getPrimaryKey();
+				$this->initFromUser($record);
 				return true;
 			}
 			Yii::log('Failed to save user: '.print_r($record->getErrors(),true), 'warning');
@@ -218,12 +228,10 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function isActive()
 	{
-		if ($this->_id===null)
+		if (($record=$this->getActiveRecord())===null) {
 			return false;
-		if (($record=User::model()->findByPk($this->_id))!==null) {
-			return (bool)$record->is_active;
 		}
-		return false;
+		return (bool)$record->is_active;
 	}
 
 	/**
@@ -232,12 +240,22 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function isDisabled()
 	{
-		if ($this->_id===null)
+		if (($record=$this->getActiveRecord())===null) {
 			return false;
-		if (($record=User::model()->findByPk($this->_id))!==null) {
-			return (bool)$record->is_disabled;
 		}
-		return false;
+		return (bool)$record->is_disabled;
+	}
+
+	/**
+	 * Checkes if user email address is verified.
+	 * @return boolean
+	 */
+	public function isVerified()
+	{
+		if (($record=$this->getActiveRecord())===null) {
+			return false;
+		}
+		return (bool)$record->email_verified;
 	}
 
 	/**
@@ -251,16 +269,14 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function getActivationKey()
 	{
-		if ($this->_id===null)
+		if (($record=$this->getActiveRecord())===null) {
 			return false;
-		if (($record=User::model()->findByPk($this->_id))!==null) {
-			$activationKey = md5(time().mt_rand().$record->username);
-			if (!$record->saveAttributes(array('activation_key' => $activationKey))) {
-				return false;
-			}
-			return $activationKey;
 		}
-		return false;
+		$activationKey = md5(time().mt_rand().$record->username);
+		if (!$record->saveAttributes(array('activation_key' => $activationKey))) {
+			return false;
+		}
+		return $activationKey;
 	}
 
 	/**
@@ -270,12 +286,10 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function verifyActivationKey($activationKey)
 	{
-		if ($this->_id===null)
+		if (($record=$this->getActiveRecord())===null) {
 			return self::ERROR_AKEY_INVALID;
-		if (($record=User::model()->findByPk($this->_id))!==null) {
-			return $record->activation_key === $activationKey ? self::ERROR_AKEY_NONE : self::ERROR_AKEY_INVALID;
 		}
-		return self::ERROR_AKEY_INVALID;
+		return $record->activation_key === $activationKey ? self::ERROR_AKEY_NONE : self::ERROR_AKEY_INVALID;
 	}
 
 	/**
@@ -286,27 +300,25 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function verifyEmail($requireVerifiedEmail=false)
 	{
-		if ($this->_id===null)
+		if (($record=$this->getActiveRecord())===null) {
 			return false;
-		if (($record=User::model()->findByPk($this->_id))!==null) {
-			/** 
-			 * Only update $record if it's not already been updated, otherwise 
-			 * saveAttributes will return false, incorrectly suggesting 
-			 * failure.  
-			 */
-			if (!$record->email_verified) {
-				$attributes = array('email_verified' => 1);
-
-				if ($requireVerifiedEmail && !$record->is_active) {
-					$attributes['is_active'] = 1;
-				}
-				if (!$record->saveAttributes($attributes)) {
-					return false;
-				}
-			}
-			return true;
 		}
-		return false;
+		/** 
+		 * Only update $record if it's not already been updated, otherwise 
+		 * saveAttributes will return false, incorrectly suggesting 
+		 * failure.  
+		 */
+		if (!$record->email_verified) {
+			$attributes = array('email_verified' => 1);
+
+			if ($requireVerifiedEmail && !$record->is_active) {
+				$attributes['is_active'] = 1;
+			}
+			if (!$record->saveAttributes($attributes)) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	/**
@@ -328,12 +340,10 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function getOneTimePasswordSecret()
 	{
-		if ($this->_id===null)
+		if (($record=$this->getActiveRecord())===null) {
 			return false;
-		if (($record=User::model()->findByPk($this->_id))!==null) {
-			return $record->one_time_password_secret;
 		}
-		return false;
+		return $record->one_time_password_secret;
 	}
 
 	/**
@@ -343,12 +353,10 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function setOneTimePasswordSecret($secret)
 	{
-		if ($this->_id===null)
+		if (($record=$this->getActiveRecord())===null) {
 			return false;
-		if (($record=User::model()->findByPk($this->_id))!==null) {
-			return $record->saveAttributes(array('one_time_password_secret' => $secret));
 		}
-		return false;
+		return $record->saveAttributes(array('one_time_password_secret' => $secret));
 	}
 
 	/**
@@ -357,15 +365,13 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function getOneTimePassword()
 	{
-		if ($this->_id===null)
+		if (($record=$this->getActiveRecord())===null) {
 			return array(null, null);
-		if (($record=User::model()->findByPk($this->_id))!==null) {
-			return array(
-				$record->one_time_password_code,
-				$record->one_time_password_counter === null ? 1 : $record->one_time_password_counter,
-			);
 		}
-		return array(null, null);
+		return array(
+			$record->one_time_password_code,
+			$record->one_time_password_counter === null ? 1 : $record->one_time_password_counter,
+		);
 	}
 
 	/**
@@ -374,15 +380,13 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function setOneTimePassword($password, $counter = 1)
 	{
-		if ($this->_id===null)
+		if (($record=$this->getActiveRecord())===null) {
 			return false;
-		if (($record=User::model()->findByPk($this->_id))!==null) {
-			return $record->saveAttributes(array(
-				'one_time_password_code' => $password,
-				'one_time_password_counter' => $counter,
-			));
 		}
-		return false;
+		return $record->saveAttributes(array(
+			'one_time_password_code' => $password,
+			'one_time_password_counter' => $counter,
+		));
 	}
 
 	// }}}
@@ -433,9 +437,7 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function savePicture($picture)
 	{
-		if ($this->_id===null)
-			return null;
-		if (($record=User::model()->findByPk($this->_id))===null) {
+		if (($record=$this->getActiveRecord())===null) {
 			return null;
 		}
 		$pictureRecord = $record->userProfilePictures(array('condition'=>'original_picture_id IS NULL'));
@@ -511,21 +513,17 @@ class UserIdentity extends CUserIdentity
 	/**
 	 * @inheritdoc
 	 */
-	public function getPictureUrl($width=80, $height=80)
+	public function getPictureUrl($width=null, $height=null)
 	{
-		if ($this->_id===null)
-			return null;
-		if (($record=User::model()->findByPk($this->_id))===null) {
+		if (($record=$this->getActiveRecord())===null) {
 			return null;
 		}
 		// try to locate biggest picture smaller than specified dimensions
-		$criteria = array(
-			'select'	=> 'id',
-			'condition'	=> 'width <= :max_width AND height <= :max_height',
-			'params'	=> array(':max_width'=>$width, ':max_height'=>$height),
-			'order'		=> 'width DESC',
-			'limit'		=> 1,
-		);
+		$criteria = array('select' => 'id', 'order' => 'width DESC', 'limit' => 1,);
+		if ($width !== null && $height !== null) {
+			$criteria['condition'] = 'width <= :width AND height <= :height';
+			$criteria['params'] = array(':width'=>$width, ':height'=>$height);
+		}
 		$pictures = $record->userProfilePictures($criteria);
 		if (!empty($pictures)) {
 			return array(
@@ -586,6 +584,82 @@ class UserIdentity extends CUserIdentity
 			$attributes['id'] = $id;
 		}
 		return UserProfilePicture::model()->deleteAllByAttributes($attributes);
+	}
+
+	// }}}
+
+	// {{{ IManagedIdentity
+
+	/**
+	 * @inheritdoc
+	 */
+	public function getDataProvider(SearchForm $searchForm)
+	{
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id', $searchForm->id);
+		$criteria->compare('username', $searchForm->username,true);
+		$criteria->compare('email', $searchForm->email,true);
+		$criteria->compare('firstname', $searchForm->firstName,true);
+		$criteria->compare('lastname', $searchForm->lastName,true);
+		$criteria->compare('created_on', $searchForm->createdOn);
+		$criteria->compare('updated_on', $searchForm->updatedOn);
+		$criteria->compare('last_visit_on', $searchForm->lastVisitOn);
+		$criteria->compare('email_verified', $searchForm->emailVerified);
+		$criteria->compare('is_active', $searchForm->isActive);
+		$criteria->compare('is_disabled', $searchForm->isDisabled);
+		$dataProvider = new CActiveDataProvider('User', array('criteria'=>$criteria, 'keyAttribute'=>'id'));
+		$identities = array();
+		foreach($dataProvider->getData() as $row) {
+			$identities[] = self::createFromUser($row);
+		}
+		$dataProvider->setData($identities);
+		return $dataProvider;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function toggleStatus($status)
+	{
+		if (($record=$this->getActiveRecord())===null) {
+			return false;
+		}
+		switch($status) {
+		case self::STATUS_EMAIL_VERIFIED: $attributes['email_verified'] = !$record->email_verified; break;
+		case self::STATUS_IS_ACTIVE: $attributes['is_active'] = !$record->is_active; break;
+		case self::STATUS_IS_DISABLED: $attributes['is_disable'] = !$record->is_disabled; break;
+		}
+		return $record->saveAttributes($attributes);
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function delete()
+	{
+		if (($record=$this->getActiveRecord())===null) {
+			return false;
+		}
+		return $record->delete();
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function getTimestamps($key=null)
+	{
+		if (($record=$this->getActiveRecord())===null) {
+			return false;
+		}
+		$timestamps = array(
+			'createdOn' => $record->created_on,
+			'updatedOn' => $record->updated_on,
+			'lastVisitOn' => $record->last_visit_on,
+			'passwordSetOn' => $record->password_set_on,
+		);
+		// can't use isset, since it returns false for null values
+		return $key === null || !array_key_exists($key, $timestamps) ? $timestamps : $timestamps[$key];
 	}
 
 	// }}}

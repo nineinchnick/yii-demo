@@ -9,6 +9,7 @@ return array(
 	'aliases'		=> array(
 		'vendors' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'vendors',
 		'nfy'=>'vendors.nineinchnick.yii-nfy',
+		'usr'=>'vendors.nineinchnick.yii-usr',
 	),
 	'import'=>array(
 		'application.models.*',
@@ -18,6 +19,10 @@ return array(
 	'modules'=>array(
 		'nfy'=>array(
 			'class'=>'vendors.nineinchnick.yii-nfy.NfyModule',
+		),
+		'usr'=>array(
+			'class'=>'vendors.nineinchnick.yii-usr.UsrModule',
+			'userIdentityClass' => 'UserIdentity',
 		),
 	),
 	'components'=>array(
@@ -58,8 +63,7 @@ return array(
 		),
 	),
 	'commandMap' => array(
-		'nfy' => array(
-			'class'=>'nfy.commands.NfyCommand',
-		),
+		'nfy' => array('class'=>'nfy.commands.NfyCommand'),
+		'usr' => array('class'=>'usr.commands.UsrCommand'),
 	),
 );
