@@ -1,5 +1,6 @@
 protected/vendor
 protected/runtime
 protected/data/testdrive.db
+protected/composer.phar
 assets
 .idea
