@@ -12,13 +12,14 @@ return array(
 	'aliases'		=> array(
 		'vendor' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'vendor',
 		'Faker' => 'application.vendor.fzaninotto.faker.src.Faker',
-		'bootstrap' => 'ext.bootstrap',
+		'bootstrap' => 'vendor.crisu83.yiistrap',
 	),
 	'preload'=>array('log'),
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
-		'bootstrap.helpers.TbHtml',
+		'bootstrap.helpers.*',
+		'bootstrap.behaviors.*',
 	),
 	'behaviors' => array('ApplicationConfigBehavior'),
 	'modules'=>array(
