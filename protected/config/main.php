@@ -20,6 +20,7 @@ return array(
 		'application.components.*',
 		'bootstrap.helpers.*',
 		'bootstrap.behaviors.*',
+		'vendor.nineinchnick.yii-nfy.models.*',
 	),
 	'behaviors' => array('ApplicationConfigBehavior'),
 	'modules'=>array(

@@ -68,12 +68,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "61a62d67ec2d5a19aa653ffe411f312e306556be"
+                "reference": "991e39d280afc34a91684e5789023f1b276e4618"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/61a62d67ec2d5a19aa653ffe411f312e306556be",
-                "reference": "61a62d67ec2d5a19aa653ffe411f312e306556be",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/991e39d280afc34a91684e5789023f1b276e4618",
+                "reference": "991e39d280afc34a91684e5789023f1b276e4618",
                 "shasum": ""
             },
             "require": {
@@ -106,7 +106,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2014-02-24 21:51:30"
+            "time": "2014-03-26 17:22:53"
         },
         {
             "name": "nineinchnick/edatatables",
@@ -114,12 +114,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nineinchnick/edatatables.git",
-                "reference": "e29deebdd6393188f779855efaa3a524d79f338c"
+                "reference": "a81032e9710edec6453522bd5b01e8aeb739d9f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nineinchnick/edatatables/zipball/e29deebdd6393188f779855efaa3a524d79f338c",
-                "reference": "e29deebdd6393188f779855efaa3a524d79f338c",
+                "url": "https://api.github.com/repos/nineinchnick/edatatables/zipball/a81032e9710edec6453522bd5b01e8aeb739d9f0",
+                "reference": "a81032e9710edec6453522bd5b01e8aeb739d9f0",
                 "shasum": ""
             },
             "require": {
@@ -138,7 +138,7 @@
                 }
             ],
             "description": "Grid widget for the Yii Framework, wrapper for the DataTables jQuery plugin",
-            "time": "2014-02-27 18:48:11"
+            "time": "2014-03-24 21:11:20"
         },
         {
             "name": "nineinchnick/select2",
@@ -177,12 +177,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nineinchnick/yii-exporter.git",
-                "reference": "278e2ec4ad83cf63c9e38e63190f5d40bc84165e"
+                "reference": "dc672332d6779c43baf490fb70144d3bca8d264c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nineinchnick/yii-exporter/zipball/278e2ec4ad83cf63c9e38e63190f5d40bc84165e",
-                "reference": "278e2ec4ad83cf63c9e38e63190f5d40bc84165e",
+                "url": "https://api.github.com/repos/nineinchnick/yii-exporter/zipball/dc672332d6779c43baf490fb70144d3bca8d264c",
+                "reference": "dc672332d6779c43baf490fb70144d3bca8d264c",
                 "shasum": ""
             },
             "type": "library",
@@ -198,7 +198,7 @@
                 }
             ],
             "description": "A widget for the Yii framework for exporting data.",
-            "time": "2014-02-03 16:48:31"
+            "time": "2014-03-20 14:55:37"
         },
         {
             "name": "nineinchnick/yii-nfy",
@@ -206,12 +206,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nineinchnick/yii-nfy.git",
-                "reference": "fe8d8981f6836955520738ca2b5bab62e2e22f67"
+                "reference": "874e4bbaaa880fa5e2ce1a5ef4dd3fff6442cbeb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nineinchnick/yii-nfy/zipball/fe8d8981f6836955520738ca2b5bab62e2e22f67",
-                "reference": "fe8d8981f6836955520738ca2b5bab62e2e22f67",
+                "url": "https://api.github.com/repos/nineinchnick/yii-nfy/zipball/874e4bbaaa880fa5e2ce1a5ef4dd3fff6442cbeb",
+                "reference": "874e4bbaaa880fa5e2ce1a5ef4dd3fff6442cbeb",
                 "shasum": ""
             },
             "require": {
@@ -230,7 +230,7 @@
                 }
             ],
             "description": "Yii framework module for ending notifications and displaying them using web notifications and ajax polling.",
-            "time": "2014-02-27 18:47:50"
+            "time": "2014-03-25 10:28:45"
         },
         {
             "name": "nineinchnick/yii-usr",
@@ -238,12 +238,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nineinchnick/yii-usr.git",
-                "reference": "8a12538a666f202080a351cf03a3e817e65df796"
+                "reference": "03142193bc8737e6d708fc815fc3053e26a7fac0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nineinchnick/yii-usr/zipball/8a12538a666f202080a351cf03a3e817e65df796",
-                "reference": "8a12538a666f202080a351cf03a3e817e65df796",
+                "url": "https://api.github.com/repos/nineinchnick/yii-usr/zipball/03142193bc8737e6d708fc815fc3053e26a7fac0",
+                "reference": "03142193bc8737e6d708fc815fc3053e26a7fac0",
                 "shasum": ""
             },
             "require": {
@@ -262,7 +262,7 @@
                 }
             ],
             "description": "Yii framework module for user authentication, password reset, registration and profile updating.",
-            "time": "2014-02-26 13:16:43"
+            "time": "2014-03-26 06:29:09"
         },
         {
             "name": "pdepend/pdepend",

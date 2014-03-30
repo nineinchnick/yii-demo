@@ -109,6 +109,7 @@ class Controller extends CController
 			),
 		);
 
+        Yii::import('nfy.models.*');
 		$messagesWidget = $c->widget('nfy.components.MessagesWidget', array('messages' => array('queue' => Yii::app()->queue->peek(Yii::app()->user->getId()))));
 		$userMenuItems = array(
 			array(

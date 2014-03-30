@@ -426,7 +426,7 @@ class UserIdentity extends CUserIdentity
 	{
 		if ($this->_id===null)
 			return false;
-        self::removeRemoteIdentity($provider, $identifier);
+		UserRemoteIdentity::model()->deleteAllByAttributes(array('provider'=>$provider, 'identifier'=>$identifier));
 		$model = new UserRemoteIdentity;
 		$model->setAttributes(array(
 			'user_id' => $this->_id,
@@ -439,15 +439,22 @@ class UserIdentity extends CUserIdentity
     /**
      * @inheritdoc
      */
-    public static function removeRemoteIdentity($provider, $identifier)
+    public function removeRemoteIdentity($provider)
     {
 		if ($this->_id===null)
 			return false;
-		$criteria = new CDbCriteria;
-		$criteria->compare('provider',$provider);
-		$criteria->compare('identifier',$identifier);
-		UserRemoteIdentity::model()->deleteAll($criteria);
+		UserRemoteIdentity::model()->deleteAllByAttributes(array('provider'=>$provider, 'user_id'=>$this->_id));
         return true;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function hasRemoteIdentity($provider)
+    {
+		if ($this->_id===null)
+			return false;
+		return 0 != UserRemoteIdentity::model()->countByAttributes(array('provider'=>$provider, 'user_id'=>$this->_id));
     }
 
     /**
