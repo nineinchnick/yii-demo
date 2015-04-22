@@ -1,14 +1,14 @@
 <?php
 
 // if EDataTables would be used more commonly, this should be in the 'import' section of config/main.php
-Yii::import('ext.EDataTables.*');
+Yii::import('vendor.nineinchnick.edatatables.*');
 
 class EdatatablesController extends Controller
 {
 	public function actions() {
 		return array(
 			'export' => array(
-				'class'		=> 'ext.exporter.ExportAction',
+				'class'		=> 'vendor.nineinchnick.yii-exporter.ExportAction',
 				'modelClass'=> 'PreciousMetalFixing',
 				'columns'	=> $this->columns(),
 				'widget'	=> array('filename' => 'goldFixings.csv'),
@@ -42,7 +42,7 @@ class EdatatablesController extends Controller
         /**
          * @var $widget EDataTables
          */
-		$widget=$this->createWidget('ext.EDataTables.EDataTables', array(
+		$widget=$this->createWidget('vendor.nineinchnick.edatatables.EDataTables', array(
 			'id'            => 'goldFixing',
 			'dataProvider'  => $model->search($columns),
 			'ajaxUrl'       => $this->createUrl($this->getAction()->getId()),
@@ -72,7 +72,7 @@ class EdatatablesController extends Controller
         /**
          * @var $widget EDataTables
          */
-		$widget=$this->createWidget('ext.EDataTables.EDataTables', array(
+		$widget=$this->createWidget('vendor.nineinchnick.edatatables.EDataTables', array(
 			'id'            => 'goldFixing',
 			'dataProvider'  => $dataProvider,
 			'ajaxUrl'       => $this->createUrl($this->getAction()->getId()),

@@ -1,31 +1,39 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "39b77ba5bc956d18f46d504ebf8ba580",
+    "hash": "c378918654666094463d61af34850e13",
     "packages": [
         {
             "name": "crisu83/yiistrap",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Crisu83/yiistrap.git",
-                "reference": "f9cc90770d57aa48fde0dcb0a1a10481d3c146b5"
+                "url": "https://github.com/crisu83/yiistrap.git",
+                "reference": "98ba4b081070c6285be26ef676106608edfe40ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Crisu83/yiistrap/zipball/f9cc90770d57aa48fde0dcb0a1a10481d3c146b5",
-                "reference": "f9cc90770d57aa48fde0dcb0a1a10481d3c146b5",
+                "url": "https://api.github.com/repos/crisu83/yiistrap/zipball/98ba4b081070c6285be26ef676106608edfe40ea",
+                "reference": "98ba4b081070c6285be26ef676106608edfe40ea",
                 "shasum": ""
             },
+            "require": {
+                "twbs/bootstrap": ">=3.3.0"
+            },
             "require-dev": {
+                "apigen/apigen": "~4.0",
                 "codeception/codeception": "@stable",
                 "crisu83/yii-composer": ">=1.0.0",
                 "yiisoft/yii": ">=1.1.13"
             },
             "type": "library",
             "extra": {
+                "branch-alias": {
+                    "dev-develop": "2.0.x-dev"
+                },
                 "yii-install-writable": [
                     "tests/_log"
                 ]
@@ -36,7 +44,8 @@
                     "components/",
                     "form/",
                     "helpers/",
-                    "widgets/"
+                    "widgets/",
+                    "gii/bootstrap/BootstrapCode.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -60,7 +69,30 @@
                 "bootstrap",
                 "yii"
             ],
-            "time": "2014-02-24 07:53:45"
+            "time": "2015-04-17 07:37:12"
+        },
+        {
+            "name": "datatables/datatables",
+            "version": "1.10.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DataTables/DataTables.git",
+                "reference": "34abc58d70949446e556c212e7e625e6cc6fd3b5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DataTables/DataTables/zipball/34abc58d70949446e556c212e7e625e6cc6fd3b5",
+                "reference": "34abc58d70949446e556c212e7e625e6cc6fd3b5",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, which will add advanced interaction controls to any HTML table.",
+            "homepage": "http://www.datatables.net/",
+            "time": "2015-04-03 13:47:53"
         },
         {
             "name": "fzaninotto/faker",
@@ -68,27 +100,33 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "a277bf23f9346e9edd704e01571fecd37af537d0"
+                "reference": "901bde792eddf6907f33634ff8aafb2dfddd4784"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/a277bf23f9346e9edd704e01571fecd37af537d0",
-                "reference": "a277bf23f9346e9edd704e01571fecd37af537d0",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/901bde792eddf6907f33634ff8aafb2dfddd4784",
+                "reference": "901bde792eddf6907f33634ff8aafb2dfddd4784",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~1.5"
+            },
+            "suggest": {
+                "ext-intl": "*"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4.x-dev"
+                    "dev-master": "1.5.x-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Faker": "src/",
-                    "Faker\\PHPUnit": "test/"
+                "psr-4": {
+                    "Faker\\": "src/Faker/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -97,7 +135,7 @@
             ],
             "authors": [
                 {
-                    "name": "François Zaninotto"
+                    "name": "Francois Zaninotto"
                 }
             ],
             "description": "Faker is a PHP library that generates fake data for you.",
@@ -106,23 +144,57 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2014-04-04 08:07:01"
+            "time": "2015-04-14 13:37:56"
         },
         {
-            "name": "nineinchnick/edatatables",
-            "version": "dev-master",
+            "name": "mozarcik/yii-datepicker",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nineinchnick/edatatables.git",
-                "reference": "4472a151f283d077bcd1c363e3f7f190d136baf9"
+                "url": "https://github.com/mozarcik/yii-datepicker.git",
+                "reference": "13acaa532790f7c0e65adab25daa73127a1211b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nineinchnick/edatatables/zipball/4472a151f283d077bcd1c363e3f7f190d136baf9",
-                "reference": "4472a151f283d077bcd1c363e3f7f190d136baf9",
+                "url": "https://api.github.com/repos/mozarcik/yii-datepicker/zipball/13acaa532790f7c0e65adab25daa73127a1211b6",
+                "reference": "13acaa532790f7c0e65adab25daa73127a1211b6",
                 "shasum": ""
             },
             "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Michał Motyczko",
+                    "email": "michal@motyczko.pl",
+                    "homepage": "http://motyczko.pl/"
+                }
+            ],
+            "description": "Yii extension wrapper for bootstrap-datepicker",
+            "time": "2014-10-30 12:53:49"
+        },
+        {
+            "name": "nineinchnick/edatatables",
+            "version": "dev-mm-dt-upgrade-1.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nineinchnick/edatatables.git",
+                "reference": "6311396aad3d40031bad79d6edacdbecc3f0cfd3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nineinchnick/edatatables/zipball/6311396aad3d40031bad79d6edacdbecc3f0cfd3",
+                "reference": "6311396aad3d40031bad79d6edacdbecc3f0cfd3",
+                "shasum": ""
+            },
+            "require": {
+                "datatables/datatables": "1.10.*",
+                "mozarcik/yii-datepicker": "1.4.*",
                 "php": ">=5.3.0"
             },
             "type": "library",
@@ -138,7 +210,7 @@
                 }
             ],
             "description": "Grid widget for the Yii Framework, wrapper for the DataTables jQuery plugin",
-            "time": "2014-04-08 12:17:50"
+            "time": "2015-04-22 20:30:39"
         },
         {
             "name": "nineinchnick/select2",
@@ -177,12 +249,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nineinchnick/yii-exporter.git",
-                "reference": "dc672332d6779c43baf490fb70144d3bca8d264c"
+                "reference": "8150930f3eb99e93e761f3e192e81d0ff9004640"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nineinchnick/yii-exporter/zipball/dc672332d6779c43baf490fb70144d3bca8d264c",
-                "reference": "dc672332d6779c43baf490fb70144d3bca8d264c",
+                "url": "https://api.github.com/repos/nineinchnick/yii-exporter/zipball/8150930f3eb99e93e761f3e192e81d0ff9004640",
+                "reference": "8150930f3eb99e93e761f3e192e81d0ff9004640",
                 "shasum": ""
             },
             "type": "library",
@@ -193,12 +265,11 @@
             "authors": [
                 {
                     "name": "Jan Waś",
-                    "email": "janek.jan@gmail.com",
-                    "homepage": "http://niix.pl/"
+                    "email": "janek.jan@gmail.com"
                 }
             ],
             "description": "A widget for the Yii framework for exporting data.",
-            "time": "2014-03-20 14:55:37"
+            "time": "2014-08-28 12:01:49"
         },
         {
             "name": "nineinchnick/yii-nfy",
@@ -206,12 +277,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nineinchnick/yii-nfy.git",
-                "reference": "1fe869c8df0620fd0570a1e6da79a6cf9674ac32"
+                "reference": "c6d871fa1b0b03bc62cabab900bc9a1ed90243f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nineinchnick/yii-nfy/zipball/1fe869c8df0620fd0570a1e6da79a6cf9674ac32",
-                "reference": "1fe869c8df0620fd0570a1e6da79a6cf9674ac32",
+                "url": "https://api.github.com/repos/nineinchnick/yii-nfy/zipball/c6d871fa1b0b03bc62cabab900bc9a1ed90243f5",
+                "reference": "c6d871fa1b0b03bc62cabab900bc9a1ed90243f5",
                 "shasum": ""
             },
             "require": {
@@ -230,7 +301,7 @@
                 }
             ],
             "description": "Yii framework module for ending notifications and displaying them using web notifications and ajax polling.",
-            "time": "2014-04-02 10:57:45"
+            "time": "2015-02-27 14:12:53"
         },
         {
             "name": "nineinchnick/yii-usr",
@@ -238,16 +309,20 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nineinchnick/yii-usr.git",
-                "reference": "2e7e62832cf55c347dcf7cfb38a1f1fd11be84bf"
+                "reference": "cd99538cab35719aec4ea83ed5dbe13d61ef506f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nineinchnick/yii-usr/zipball/2e7e62832cf55c347dcf7cfb38a1f1fd11be84bf",
-                "reference": "2e7e62832cf55c347dcf7cfb38a1f1fd11be84bf",
+                "url": "https://api.github.com/repos/nineinchnick/yii-usr/zipball/cd99538cab35719aec4ea83ed5dbe13d61ef506f",
+                "reference": "cd99538cab35719aec4ea83ed5dbe13d61ef506f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "php": ">=5.3.0",
+                "phpunit": "dev-master"
             },
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
@@ -262,7 +337,7 @@
                 }
             ],
             "description": "Yii framework module for user authentication, password reset, registration and profile updating.",
-            "time": "2014-04-13 19:38:59"
+            "time": "2015-04-22 11:16:28"
         },
         {
             "name": "pdepend/pdepend",
@@ -299,21 +374,25 @@
         },
         {
             "name": "phpmd/phpmd",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpmd/phpmd.git",
-                "reference": "692b7b1b64518091b2b1bea91b489dbb13598c07"
+                "reference": "f2d47500f4c5f80ee442d95829c62c2ece2bbeb6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpmd/phpmd/zipball/692b7b1b64518091b2b1bea91b489dbb13598c07",
-                "reference": "692b7b1b64518091b2b1bea91b489dbb13598c07",
+                "url": "https://api.github.com/repos/phpmd/phpmd/zipball/f2d47500f4c5f80ee442d95829c62c2ece2bbeb6",
+                "reference": "f2d47500f4c5f80ee442d95829c62c2ece2bbeb6",
                 "shasum": ""
             },
             "require": {
-                "pdepend/pdepend": ">=1.1.1",
+                "pdepend/pdepend": "1.1.*",
                 "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.*@stable",
+                "squizlabs/php_codesniffer": "@stable"
             },
             "bin": [
                 "src/bin/phpmd"
@@ -324,8 +403,62 @@
                 "../../pdepend/pdepend/src/main/php",
                 "src/main/php"
             ],
+            "license": [
+                "BSD-3-Clause"
+            ],
             "description": "Official version of PHPMD handled with Composer.",
-            "time": "2013-07-26 14:47:02"
+            "time": "2014-09-16 14:26:49"
+        },
+        {
+            "name": "twbs/bootstrap",
+            "version": "v3.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twbs/bootstrap.git",
+                "reference": "a10eb60bc0b07b747fa0c4ebd8821eb7307bd07f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/a10eb60bc0b07b747fa0c4ebd8821eb7307bd07f",
+                "reference": "a10eb60bc0b07b747fa0c4ebd8821eb7307bd07f",
+                "shasum": ""
+            },
+            "replace": {
+                "twitter/bootstrap": "self.version"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jacob Thornton",
+                    "email": "jacobthornton@gmail.com"
+                },
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
+                }
+            ],
+            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+            "homepage": "http://getbootstrap.com",
+            "keywords": [
+                "JS",
+                "css",
+                "framework",
+                "front-end",
+                "less",
+                "mobile-first",
+                "responsive",
+                "web"
+            ],
+            "time": "2015-03-16 15:44:41"
         },
         {
             "name": "yiisoft/yii",
@@ -412,11 +545,14 @@
             "time": "2013-08-12 00:12:08"
         }
     ],
-    "packages-dev": [
-
-    ],
+    "packages-dev": [],
     "aliases": [
-
+        {
+            "alias": "dev-master",
+            "alias_normalized": "9999999-dev",
+            "version": "dev-mm-dt-upgrade-1.10",
+            "package": "nineinchnick/edatatables"
+        }
     ],
     "minimum-stability": "stable",
     "stability-flags": {
@@ -427,10 +563,10 @@
         "crisu83/yiistrap": 20,
         "fzaninotto/faker": 20
     },
+    "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.3.2"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }

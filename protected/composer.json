@@ -15,7 +15,7 @@
 		"php": ">=5.3.2"
 		,"phpmd/phpmd" : "1.*"
 		,"yiisoft/yii": "1.1.14"
-		,"nineinchnick/edatatables": "dev-master"
+		,"nineinchnick/edatatables": "dev-mm-dt-upgrade-1.10 as dev-master"
 		,"nineinchnick/select2": "~1.0"
 		,"nineinchnick/yii-nfy": "dev-master"
 		,"nineinchnick/yii-usr": "dev-master"
